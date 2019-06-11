@@ -34,9 +34,11 @@ services:
     entrypoint: poet-validator-registry-tp -vv -C tcp://validator:4004
 
   pending-props-tp:
-    env_file:
-      - staging.env
-    image: propsprojectservices/pending-props:tagname
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/pending-props:latest
     container_name: pending-props-tp
     depends_on:
       - validator
@@ -91,6 +93,18 @@ services:
     depends_on:
       - validator
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+
+  eth-sync:
+    image: propsprojectservices/eth-sync:latest
+    container_name: eth-sync
+    environment:
+      - SAWTOOTH_PK
+      - ETHERSCAN_API_KEY
+      - ETHERSCAN_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+      - PROPS_TOKEN_DEPLOYED_BLOCK
+      - ETHEREUM_CONFIRMATION_BLOCKS
 
   shell:
     image: hyperledger/sawtooth-all:1.1.2

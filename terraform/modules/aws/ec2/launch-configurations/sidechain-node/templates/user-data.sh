@@ -10,7 +10,7 @@ mkdir -p /opt/sawtooth
 chmod -R 775 /opt/sawtooth
 chown ec2-user:ec2-user /opt/sawtooth
 
-runuser -l ec2-user -c "git clone git@github.com:propsproject/sidechain-node.git /opt/sawtooth"
+runuser -l ec2-user -c "git clone https://github.com/propsproject/sidechain-node.git /opt/sawtooth"
 
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose

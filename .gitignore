@@ -1,0 +1,7 @@
+*.iml
+.idea
+.terraform/
+*.tfstate
+*.backup
+node.tf
+terraform.tfvars
