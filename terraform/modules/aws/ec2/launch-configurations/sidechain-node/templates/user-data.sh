@@ -8,6 +8,7 @@ amazon-linux-extras | grep nginx | awk '{print $2}' | xargs -n 1 amazon-linux-ex
 
 service docker start
 chkconfig docker on
+usermod -a -G docker ec2-user
 
 mkdir -p /opt/sawtooth
 chmod -R 775 /opt/sawtooth
