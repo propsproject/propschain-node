@@ -6,6 +6,9 @@ yum install git docker wget "Development Tools" gcc -y
 yum install /usr/bin/g++ -y
 amazon-linux-extras | grep nginx | awk '{print $2}' | xargs -n 1 amazon-linux-extras install
 
+service docker start
+chkconfig docker on
+
 mkdir -p /opt/sawtooth
 chmod -R 775 /opt/sawtooth
 chown ec2-user:ec2-user /opt/sawtooth
@@ -24,4 +27,4 @@ echo "export ETHERSCAN_URL=${etherscan_url}" >> /home/ec2-user/.bashrc
 echo "export PROPS_TOKEN_DEPLOYED_BLOCK=${props_token_deployed_block}" >> /home/ec2-user/.bashrc
 echo "export ETHEREUM_CONFIRMATION_BLOCKS=${ethereum_confirmation_block}" >> /home/ec2-user/.bashrc
 
-runuser -l ec2-user -c "docker-compose /opt/sawtooth/sidechain-node/docker/docker-compose.yaml"
+runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/sidechain-node/docker/docker-compose.yaml up"
