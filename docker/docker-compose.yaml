@@ -88,7 +88,7 @@ services:
         done \
 
         cp -a /poet-shared/validator/keys /etc/sawtooth \
-        poet-engine -v -C tcp://validator:5050 --component tcp://validator:4004
+        poet-engine -v -C tcp://eth0:5050 --component tcp://eth0:4004
         \""
     volumes:
       - poet-shared:/poet-shared
