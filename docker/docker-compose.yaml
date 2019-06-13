@@ -61,7 +61,7 @@ services:
     entrypoint: "bash -c \"\
         sawadm keygen && \
         sawtooth keygen validator && \
-        mkdir -p /poet-shared/validator || true \
+        mkdir -p /poet-shared/validator/keys || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
         sawtooth-validator -vv \
           --endpoint tcp://54.173.72.189:8800 \
