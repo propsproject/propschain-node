@@ -28,4 +28,4 @@ echo "export ETHERSCAN_URL=${etherscan_url}" >> /home/ec2-user/.bashrc
 echo "export PROPS_TOKEN_DEPLOYED_BLOCK=${props_token_deployed_block}" >> /home/ec2-user/.bashrc
 echo "export ETHEREUM_CONFIRMATION_BLOCKS=${ethereum_confirmation_block}" >> /home/ec2-user/.bashrc
 
-runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/sidechain-node/docker/docker-compose.yaml up"
+runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/docker/docker-compose.yaml up"

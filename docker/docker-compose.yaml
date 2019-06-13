@@ -22,6 +22,7 @@ services:
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:1.1.5
     container_name: sawtooth-settings-tp-default
+    restart: always
     depends_on:
       - validator
     entrypoint: settings-tp -vv -C tcp://validator:4004
@@ -29,11 +30,13 @@ services:
   poet:
     image: hyperledger/sawtooth-poet-validator-registry-tp:1.1.2
     container_name: sawtooth-poet-validator-registry-tp
+    restart: always
     depends_on:
       - validator
     entrypoint: poet-validator-registry-tp -vv -C tcp://validator:4004
 
   pending-props-tp:
+    restart: always
     environment:
       - VALIDATOR_URL
       - ETHEREUM_URL
@@ -45,6 +48,7 @@ services:
     entrypoint: ./build/bin/pending-props-tp -c -f ./configs/default.json
 
   validator:
+    restart: always
     image: hyperledger/sawtooth-validator:1.1.5
     container_name: sawtooth-validator-default
     expose:
@@ -71,6 +75,7 @@ services:
       - poet-shared:/poet-shared
 
   sawtooth-poet-engine:
+    restart: always
     image: hyperledger/sawtooth-poet-engine:1.1.2
     container_name: sawtooth-poet-engine
     entrypoint:  "bash -c \"\
@@ -86,6 +91,7 @@ services:
       - poet-shared:/poet-shared
 
   rest-api:
+    restart: always
     image: hyperledger/sawtooth-rest-api:1.1.5
     container_name: sawtooth-rest-api-default
     ports:
@@ -95,6 +101,7 @@ services:
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
 
   shell:
+    restart: always
     image: hyperledger/sawtooth-all:1.1.2
     container_name: sawtooth-shell-default
     depends_on:
