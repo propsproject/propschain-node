@@ -59,12 +59,11 @@ services:
       - "4004:4004"
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
-        sawadm keygen && \
-        sawtooth keygen validator && \
-        mkdir -p /poet-shared/validator/keys || true \
+        sawadm keygen --force && \
+        mkdir -p /poet-shared/validator || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
         sawtooth-validator -vv \
-          --endpoint tcp://54.173.72.189:8800 \
+          --endpoint tcp://54.92.209.97:8800 \
           --bind component:tcp://eth0:4004 \
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
@@ -73,23 +72,23 @@ services:
         \""
     volumes:
       - poet-shared:/poet-shared
+    environment:
+      PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
+              /project/sawtooth-core/consensus/poet/simulator:\
+              /project/sawtooth-core/consensus/poet/core"
+    stop_signal: SIGKILL
 
   sawtooth-poet-engine:
     restart: always
     image: hyperledger/sawtooth-poet-engine:1.1.2
     container_name: sawtooth-poet-engine
-    entrypoint:  "bash -c \"\
-        while [ ! -f /poet-shared/validator/validator.priv ]; do \
-          ls -al /poet-shared/validator/keys; \
-          ls -al /poet-shared/validator; \
-          ls -al /poet-shared; \
-          echo 'waiting for validator key'; \
-          sleep 1; \
-        done \
-
-        cp -a /poet-shared/validator/keys /etc/sawtooth \
-        poet-engine -v -C tcp://eth0:5050 --component tcp://eth0:4004
-        \""
+    depends_on:
+      - validator
+    command: "bash -c \"\
+        while [ ! -f /poet-shared/validator/keys/validator.priv ]; do sleep 1; done && \
+        cp -a /poet-shared/validator/keys /etc/sawtooth && \
+        poet-engine -C tcp://validator:5050 --component tcp://validator:4004 \
+    \""
     volumes:
       - poet-shared:/poet-shared
 
