@@ -79,7 +79,7 @@ services:
     image: hyperledger/sawtooth-poet-engine:1.1.2
     container_name: sawtooth-poet-engine
     entrypoint:  "bash -c \"\
-        while [ ! -f /poet-shared/validator/keys/validator.priv ]; do \
+        while [ ! -f /poet-shared/validator/validator.priv ]; do \
           ls -al /poet-shared/validator/keys; \
           ls -al /poet-shared/validator; \
           ls -al /poet-shared; \
