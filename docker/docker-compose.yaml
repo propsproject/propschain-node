@@ -45,7 +45,7 @@ services:
     container_name: pending-props-tp
     depends_on:
       - validator
-    entrypoint: ./build/bin/pending-props-tp -c -f ./configs/default.json
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
 
   validator:
     restart: always
