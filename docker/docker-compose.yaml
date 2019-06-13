@@ -80,7 +80,9 @@ services:
     container_name: sawtooth-poet-engine
     entrypoint:  "bash -c \"\
         while [ ! -f /poet-shared/validator/keys/validator.priv ]; do \
-          ls /poet-shared/validator/keys
+          ls -al /poet-shared/validator/keys; \
+          ls -al /poet-shared/validator; \
+          ls -al /poet-shared; \
           echo 'waiting for validator key'; \
           sleep 1; \
         done \
