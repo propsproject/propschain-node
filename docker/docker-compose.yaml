@@ -62,8 +62,8 @@ services:
         sawadm keygen --force && \
         mkdir -p /poet-shared/validator || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
-        echo 'network_public_key = \'${NETWORK_PUBLIC_KEY}\'' >> /etc/sawtooth/etc/validator.toml && \
-        echo 'network_private_key = \'${NETWORK_PRIVATE_KEY}\'' >> /etc/sawtooth/etc/validator.toml && \
+        echo 'network_public_key = '${NETWORK_PUBLIC_KEY}'' >> /etc/sawtooth/etc/validator.toml && \
+        echo 'network_private_key = '${NETWORK_PRIVATE_KEY}'' >> /etc/sawtooth/etc/validator.toml && \
         cat /etc/sawtooth/etc/validator.toml && \
         sawtooth-validator -vv \
           --endpoint tcp://54.92.209.97:8800 \
