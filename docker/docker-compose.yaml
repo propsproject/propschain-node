@@ -62,6 +62,8 @@ services:
         sawadm keygen --force && \
         mkdir -p /poet-shared/validator || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
+        echo \"network_public_key = '${NETWORK_PUBLIC_KEY}'\" >> /etc/sawtooth/etc/validator.toml && \
+        echo \"network_private_key = '${NETWORK_PRIVATE_KEY}'\" >> /etc/sawtooth/etc/validator.toml && \
         sawtooth-validator -vv \
           --endpoint tcp://54.92.209.97:8800 \
           --bind component:tcp://eth0:4004 \
@@ -73,9 +75,9 @@ services:
     volumes:
       - poet-shared:/poet-shared
     environment:
-      PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:\
-              /project/sawtooth-core/consensus/poet/simulator:\
-              /project/sawtooth-core/consensus/poet/core"
+      - NETWORK_PUBLIC_KEY
+      - NETWORK_PRIVATE_KEY
+      - PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core"
     stop_signal: SIGKILL
 
   sawtooth-poet-engine:
