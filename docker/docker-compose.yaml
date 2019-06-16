@@ -77,7 +77,7 @@ services:
     environment:
       - NETWORK_PUBLIC_KEY
       - NETWORK_PRIVATE_KEY
-      - PYTHONPATH: "/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core"
+      - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
     stop_signal: SIGKILL
 
   sawtooth-poet-engine:
