@@ -1,0 +1,2 @@
+network_private_key = '%NETWORK_PRIVATE_KEY%'
+network_public_key = '%NETWORK_PUBLIC_KEY%'
