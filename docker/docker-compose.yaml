@@ -68,7 +68,7 @@ services:
         sed -i 's/%NETWORK_PUBLIC_KEY%/$NETWORK_PUBLIC_KEY/g' /etc/sawtooth/validator.toml && \
         cat /etc/sawtooth/validator.toml && \
         sawtooth-validator -vv \
-          --endpoint tcp://$${PUBLIC_IP_ADDRESS}:8800 \
+          --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
           --bind component:tcp://eth0:4004 \
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
