@@ -62,6 +62,8 @@ services:
         sawadm keygen --force && \
         mkdir -p /poet-shared/validator || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
+        wget -P /etc/sawtooth https://github.com/propsproject/propschain-node/blob/master/docker/validator.toml && \
+        sed -i -e 's/%NETWORK_PRIVATE_KEY%/test/g' /etc/sawtooth/validator.toml && \
         cat /etc/sawtooth/etc/validator.toml && \
         sawtooth-validator -vv \
           --endpoint tcp://54.92.209.97:8800 \
