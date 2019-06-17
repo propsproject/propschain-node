@@ -63,7 +63,7 @@ services:
         sawadm keygen --force && \
         mkdir -p /poet-shared/validator || true \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
-        wget -P /etc/sawtooth https://github.com/propsproject/propschain-node/blob/master/docker/validator.toml && \
+        wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/validator.toml && \
         sed -i 's/%NETWORK_PRIVATE_KEY%/$NETWORK_PRIVATE_KEY/g' /etc/sawtooth/validator.toml && \
         sed -i 's/%NETWORK_PRIVATE_KEY%/$NETWORK_PUBLIC_KEY/g' /etc/sawtooth/validator.toml && \
         cat /etc/sawtooth/validator.toml && \
