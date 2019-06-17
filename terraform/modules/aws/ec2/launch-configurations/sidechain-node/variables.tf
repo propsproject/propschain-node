@@ -66,3 +66,11 @@ variable "props_token_deployed_block" {
 variable "ethereum_confirmation_block" {
 
 }
+
+variable "network_private_key" {
+
+}
+
+variable "network_public_key" {
+
+}

@@ -17,15 +17,17 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/templates/user-data.sh")}"
 
   vars = {
-    environment = "${var.environment_name}"
-    validator_url = "${var.validator_url}"
-    ethereum_url = "${var.ethereum_url}"
-    props_token_contract_address = "${var.props_token_contract_address}"
-    sawtooth_pk = "${var.sawtooth_pk}"
-    etherscan_api_key = "${var.etherscan_api_key}"
-    etherscan_url = "${var.etherscan_url}"
-    props_token_deployed_block = "${var.props_token_deployed_block}"
-    ethereum_confirmation_block = "${var.ethereum_confirmation_block}"
+    environment                   = "${var.environment_name}"
+    validator_url                 = "${var.validator_url}"
+    ethereum_url                  = "${var.ethereum_url}"
+    props_token_contract_address  = "${var.props_token_contract_address}"
+    sawtooth_pk                   = "${var.sawtooth_pk}"
+    etherscan_api_key             = "${var.etherscan_api_key}"
+    etherscan_url                 = "${var.etherscan_url}"
+    props_token_deployed_block    = "${var.props_token_deployed_block}"
+    ethereum_confirmation_block   = "${var.ethereum_confirmation_block}"
+    network_private_key           = "${var.network_private_key}"
+    network_public_key            = "${var.network_public_key}"
   }
 }
 
