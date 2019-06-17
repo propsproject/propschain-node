@@ -31,5 +31,5 @@ echo "export NETWORK_PRIVATE_KEY=${network_private_key}" >> /home/ec2-user/.bash
 echo "export NETWORK_PUBLIC_KEY=${network_public_key}" >> /home/ec2-user/.bashrc
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
 
-runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/docker/docker-compose.yaml up"
+runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/docker/docker-compose.yaml up -d"
 

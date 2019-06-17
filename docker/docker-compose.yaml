@@ -78,6 +78,7 @@ services:
     volumes:
       - poet-shared:/poet-shared
     environment:
+      - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY
       - NETWORK_PRIVATE_KEY
       - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
