@@ -57,6 +57,7 @@ services:
       - 5050
     ports:
       - "4004:4004"
+      - "8800:8800"
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \

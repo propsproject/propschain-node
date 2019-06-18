@@ -74,3 +74,15 @@ variable "network_private_key" {
 variable "network_public_key" {
 
 }
+
+variable "desired_capacity" {
+
+}
+
+variable "min_size" {
+
+}
+
+variable "max_size" {
+
+}
