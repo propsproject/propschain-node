@@ -41,7 +41,7 @@ services:
       - VALIDATOR_URL
       - ETHEREUM_URL
       - PROPS_TOKEN_CONTRACT_ADDRESS
-    image: propsprojectservices/props-transaction-processor:1
+    image: propsprojectservices/props-transaction-processor:2
     container_name: pending-props-tp
     depends_on:
       - validator
