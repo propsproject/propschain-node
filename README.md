@@ -59,7 +59,7 @@ AWS Configuration
 * aws_region: the aws region in which you want to spawn the instances. (e.g. **us-east-1**)
 * aws_availability_zones: choose the availability zones that for the instances, comma separated. (e.g. **us-east-1a,us-east-1b,us-east-1c**)
 * vpc_id: the VPC in which you want to create your instances. The default AWS VPC is always a good starting point. (e.g **vpc-abcdefgh**)
-* subnet_ids: the subnets (comma separated) in which you want to create your instances, I suggest taking the default AWS public subnets, (e.g **subnet-abcdefgh,subnet-ijklmnop"**)
+* subnet_ids: the subnets (comma separated) in which you want to create your instances, I suggest taking the default AWS public subnets, (e.g **subnet-abcdefgh,subnet-ijklmnop**)
 * ami: this is the AMI that the instance is based of, this is the official amazon linux image for AWS. Don't change this value.
 
 Node configuration
