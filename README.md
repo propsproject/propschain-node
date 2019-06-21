@@ -111,7 +111,7 @@ It will take some time to sync your node, so blocks might not give immediate res
 
 ### Docker
 
-If you followed the terraform instructions and built your instance that way, you don't need this section. But it's still useful read this.
+If you followed the terraform instructions and built your instance that way, you don't need this section. But it's still useful to read this.
 
 #### 1. Preparation
 
