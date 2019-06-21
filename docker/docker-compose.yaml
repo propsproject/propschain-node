@@ -100,7 +100,8 @@ services:
         cat /etc/sawtooth/keys/validator.priv
 
         poet registration create --enclave-module simulator -k /etc/sawtooth/keys/validator.priv -o /poet-shared/poet.batch
-        poet-engine -v -C tcp://validator:5050 --component tcp://validator:4004 \
+        sawtooth batch submit -f /poet-shared/poet.batch --url=http://rest-api:8008
+        poet-engine -v -C tcp://validator:5050 --component tcp://validator:4004
     \""
     volumes:
       - poet-shared:/poet-shared
