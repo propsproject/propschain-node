@@ -64,7 +64,7 @@ services:
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
         sawadm keygen --force && \
-        mkdir -p /poet-shared/validator || true \
+        mkdir -p /poet-shared/validator || true && \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
         wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/validator.toml && \
         sed -i 's/%NETWORK_PRIVATE_KEY%/$NETWORK_PRIVATE_KEY/g' /etc/sawtooth/validator.toml && \
@@ -94,11 +94,9 @@ services:
     depends_on:
       - validator
     command: "bash -c \"\
-        while [ ! -f /poet-shared/validator/keys/validator.priv ]; do sleep 1; done && \
+        while [ ! -f /poet-shared/validator/keys/validator.priv ]; do sleep 1; echo 'Waiting for validator key'; done && \
         cp -a /poet-shared/validator/keys /etc/sawtooth && \
 
-        poet registration create --enclave-module simulator -k /etc/sawtooth/keys/validator.priv -o /poet-shared/poet.batch && \
-        sawtooth batch submit -f /poet-shared/poet.batch --url=http://rest-api:8008 && \
         poet-engine -v -C tcp://validator:5050 --component tcp://validator:4004
     \""
     volumes:
