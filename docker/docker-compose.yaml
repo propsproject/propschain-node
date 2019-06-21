@@ -97,10 +97,8 @@ services:
         while [ ! -f /poet-shared/validator/keys/validator.priv ]; do sleep 1; done && \
         cp -a /poet-shared/validator/keys /etc/sawtooth && \
 
-        cat /etc/sawtooth/keys/validator.priv
-
-        poet registration create --enclave-module simulator -k /etc/sawtooth/keys/validator.priv -o /poet-shared/poet.batch
-        sawtooth batch submit -f /poet-shared/poet.batch --url=http://rest-api:8008
+        poet registration create --enclave-module simulator -k /etc/sawtooth/keys/validator.priv -o /poet-shared/poet.batch && \
+        sawtooth batch submit -f /poet-shared/poet.batch --url=http://rest-api:8008 && \
         poet-engine -v -C tcp://validator:5050 --component tcp://validator:4004
     \""
     volumes:
