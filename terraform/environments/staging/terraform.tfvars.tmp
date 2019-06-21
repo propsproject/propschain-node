@@ -12,7 +12,21 @@ key_name                = "sawtooth-staging"
 aws_region              = "us-east-1"
 aws_availability_zones  = "us-east-1a,us-east-1b,us-east-1c"
 vpc_id                  = "" // The default vpc
-subnet_ids             = ""
+subnet_ids              = ""
 
 // Other
 ami                     = "ami-0ff8a91507f77f867"
+
+// Node configuration
+nodes_count                     = "1"
+instance_disk_size              = "40"
+ethereum_confirmation_block     = "15"
+ethereum_url                    = "https://rinkeby.infura.io/v3/<yourkeyhere>"
+etherscan_api_key               = ""
+etherscan_url                   = "https://api-rinkeby.etherscan.io/api"
+props_token_contract_address    = "0x98f8ab77be1658b398f050338b0c6f3f6c025d4a"
+props_token_deployed_block      = "3950142"
+sawtooth_pk                     = ""
+validator_url                   = "tcp://validator:4004"
+network_private_key             = ""
+network_public_key              = ""
