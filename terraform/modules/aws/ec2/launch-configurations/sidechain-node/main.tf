@@ -28,6 +28,8 @@ data "template_file" "user_data" {
     ethereum_confirmation_block   = "${var.ethereum_confirmation_block}"
     network_private_key           = "${var.network_private_key}"
     network_public_key            = "${var.network_public_key}"
+    sawtooth_rest_url             = "${var.sawtooth_rest_url}"
+    sawtooth_rest_port            = "${var.sawtooth_rest_port}"
   }
 }
 

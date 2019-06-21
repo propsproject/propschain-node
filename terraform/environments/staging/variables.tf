@@ -78,3 +78,12 @@ variable "network_private_key" {
 variable "network_public_key" {
   description = "The zeromq public key, we provide this"
 }
+
+variable "sawtooth_rest_url" {
+  description = "The sawtooth rest url"
+}
+
+variable "sawtooth_rest_port" {
+  description = "The sawtooth rest port"
+  default = 8008
+}
