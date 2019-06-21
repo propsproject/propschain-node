@@ -133,6 +133,8 @@ You need the set the following environment variables on your instance
 * ETHERSCAN_API: your api key here
 * PROPS_TOKEN_DEPLOYED_BLOCK=3950142
 * VALIDATOR_URL=tcp://validator:4004
+* ENVIRONMENT=staging
+* NODE_ENV=staging
 
 #### 3. Running your instance
 
