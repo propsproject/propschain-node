@@ -50,7 +50,7 @@ services:
     entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
 
   eth-sync:
-    restart: always
+    restart: no
     environment:
       - ETHERSCAN_URL
       - ETHERSCAN_API
