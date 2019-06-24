@@ -52,7 +52,7 @@ services:
   eth-sync:
     environment:
       - ETHERSCAN_URL
-      - ETHERSCAN_API
+      - ETHERSCAN_API_KEY
       - PROPS_TOKEN_CONTRACT_ADDRESS
       - SAWTOOTH_PK
       - ETHEREUM_URL
