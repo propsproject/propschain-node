@@ -120,6 +120,14 @@ services:
     volumes:
       - poet-shared:/poet-shared
 
+  sawtooth-identity:
+    restart: always
+    image: hyperledger/sawtooth-identity-tp:1.1.5
+    container_name: sawtooth-identity
+    depends_on:
+      - validator
+    entrypoint: identity-tp -v -C tcp://validator:4004
+
   rest-api:
     restart: always
     image: hyperledger/sawtooth-rest-api:1.1.5
