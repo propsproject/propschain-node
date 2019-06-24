@@ -86,3 +86,15 @@ variable "min_size" {
 variable "max_size" {
 
 }
+
+variable "sawtooth_rest_url" {
+
+}
+
+variable "sawtooth_rest_port" {
+
+}
+
+variable "validator_seed_url" {
+
+}

@@ -125,8 +125,16 @@ You need the set the following environment variables on your instance
 * ETHEREUM_URL=https://rinkeby.infura.io/v3/<yourkeyhere>
 * PROPS_TOKEN_CONTRACT_ADDRESS=0x98f8ab77be1658b398f050338b0c6f3f6c025d4a
 * PUBLIC_IP_ADDRESS: This is the public IP address of your instance
+* SAWTOOTH_PK: Contact us for this key
 * NETWORK_PUBLIC_KEY: Contact us for this key
 * NETWORK_PRIVATE_KEY: Contact us for this key
+* PROPS_TOKEN_CONTRACT_ADDRESS=0x98f8ab77be1658b398f050338b0c6f3f6c025d4a
+* ETHERSCAN_URL=https://rinkeby.infura.io/v3/yourkeyhere
+* ETHERSCAN_API: your api key here
+* PROPS_TOKEN_DEPLOYED_BLOCK=3950142
+* VALIDATOR_URL=tcp://validator:4004
+* ENVIRONMENT=staging
+* NODE_ENV=staging
 
 #### 3. Running your instance
 

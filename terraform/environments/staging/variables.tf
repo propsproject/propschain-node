@@ -79,10 +79,15 @@ variable "network_public_key" {
   description = "The zeromq public key, we provide this"
 }
 
-variable "sawtooth_rest_port" {
-  description = "The sawtooth rest port"
+variable "sawtooth_rest_url" {
+  description = "The sawtooth rest url"
 }
 
-variable "sawtooth_rest_url" {
-  description = "Sawtooth rest url"
+variable "sawtooth_rest_port" {
+  description = "The sawtooth rest port"
+  default = 8008
+}
+
+variable "validator_seed_url" {
+  description = "The initial validator to connect to"
 }

@@ -29,7 +29,16 @@ echo "export PROPS_TOKEN_DEPLOYED_BLOCK=${props_token_deployed_block}" >> /home/
 echo "export ETHEREUM_CONFIRMATION_BLOCKS=${ethereum_confirmation_block}" >> /home/ec2-user/.bashrc
 echo "export NETWORK_PRIVATE_KEY=${network_private_key}" >> /home/ec2-user/.bashrc
 echo "export NETWORK_PUBLIC_KEY=${network_public_key}" >> /home/ec2-user/.bashrc
+echo "export ENVIRONMENT=${environment}" >> /home/ec2-user/.bashrc
+echo "export NODE_ENV=${environment}" >> /home/ec2-user/.bashrc
+echo "export SAWTOOTH_REST_URL=${sawtooth_rest_url}" >> /home/ec2-user/.bashrc
+echo "export SAWTOOTH_REST_PORT=${sawtooth_rest_port}" >> /home/ec2-user/.bashrc
+echo "export VALIDATOR_SEED_URL=${validator_seed_url}" >> /home/ec2-user/.bashrc
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
+
+croncmd="/usr/local/bin/docker-compose -f /opt/sawtooth/docker/docker-compose.yaml start eth-sync"
+cronjob="* * * * * $croncmd"
+( crontab -u ec2-user -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -u ec2-user -
 
 runuser -l ec2-user -c "docker-compose -f /opt/sawtooth/docker/docker-compose.yaml up -d"
 
