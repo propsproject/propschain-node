@@ -75,6 +75,9 @@ Node configuration
 * validator_url: the default value is good, will need to be removed at some point
 * network_private_key: the zeromq private key, you need to contact us for this key
 * network_public_key: the zeromq public key, you need to contact us for this key
+* sawtooth_rest_url: the sawtooth rest url to be used, the default 'rest-api' is good since this is the name of the docker container
+* sawtooth_rest_port: the sawtooth rest url port, the default is '8008', which is good
+* validator_seed_url: the validator to use when the sidechain starts, the default value is good. If you already have a validator running, you can use that ip address instead (format: tcp://ipofvalidator:8800)
 
 Once you have modified terraform.tfvars we can now create the instance
 
@@ -135,6 +138,7 @@ You need the set the following environment variables on your instance
 * VALIDATOR_URL=tcp://validator:4004
 * ENVIRONMENT=staging
 * NODE_ENV=staging
+* VALIDATOR_SEED_URL: The url to connect to for getting the initial blocks, this should be in the format of tcp://ipofvalidator:8800
 
 #### 3. Running your instance
 
