@@ -23,4 +23,7 @@ module "node1" {
   validator_url                 = "${var.validator_url}"
   network_private_key           = "${var.network_private_key}"
   network_public_key            = "${var.network_public_key}"
+  sawtooth_rest_port            = "${var.sawtooth_rest_port}"
+  sawtooth_rest_url             = "${var.sawtooth_rest_url}"
+  validator_seed_url            = "${var.validator_seed_url}"
 }
