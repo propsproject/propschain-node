@@ -33,9 +33,10 @@ echo "export ENVIRONMENT=${environment}" >> /home/ec2-user/.bashrc
 echo "export NODE_ENV=${environment}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_URL=${sawtooth_rest_url}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_PORT=${sawtooth_rest_port}" >> /home/ec2-user/.bashrc
+echo "export VALIDATOR_SEED_URL=${validator_seed_url}" >> /home/ec2-user/.bashrc
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
 
-croncmd="docker-compose -f /opt/sawtooth/docker/docker-compose.yaml up -d eth-sync"
+croncmd="/usr/local/bin/docker-compose -f /opt/sawtooth/docker/docker-compose.yaml start eth-sync"
 cronjob="* * * * * $croncmd"
 ( crontab -u ec2-user -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -u ec2-user -
 

@@ -94,7 +94,7 @@ services:
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
           -P dynamic \
-          --seeds tcp://validator.staging.sidechain.propsproject.io:8800
+          --seeds $VALIDATOR_SEED_URL
         \""
     volumes:
       - poet-shared:/poet-shared

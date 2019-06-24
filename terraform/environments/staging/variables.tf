@@ -87,3 +87,7 @@ variable "sawtooth_rest_port" {
   description = "The sawtooth rest port"
   default = 8008
 }
+
+variable "validator_seed_url" {
+  description = "The initial validator to connect to"
+}
