@@ -102,6 +102,7 @@ services:
       - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY
       - NETWORK_PRIVATE_KEY
+      - VALIDATOR_SEED_URL
       - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
     stop_signal: SIGKILL
 
