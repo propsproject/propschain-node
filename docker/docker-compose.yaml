@@ -17,6 +17,7 @@ version: "2.1"
 
 volumes:
   poet-shared:
+  validator-disk:
 
 services:
   settings-tp:
@@ -98,6 +99,7 @@ services:
         \""
     volumes:
       - poet-shared:/poet-shared
+      - validator-disk:/etc/sawtooth
     environment:
       - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY
