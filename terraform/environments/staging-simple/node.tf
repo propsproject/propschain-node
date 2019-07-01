@@ -15,7 +15,6 @@ module "node1" {
 
   ethereum_url                  = "${var.ethereum_url}"
   props_token_contract_address  = "${var.props_token_contract_address}"
-  sawtooth_pk                   = "${var.sawtooth_pk}"
   which_docker_compose          = "${var.which_docker_compose}"
   validator_submission_pk       = "${var.validator_submission_pk}"
 }

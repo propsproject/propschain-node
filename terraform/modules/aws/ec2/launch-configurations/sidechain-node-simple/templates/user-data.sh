@@ -21,7 +21,6 @@ chmod +x /usr/local/bin/docker-compose
 
 echo "export ETHEREUM_URL=${ethereum_url}" >> /home/ec2-user/.bashrc
 echo "export PROPS_TOKEN_CONTRACT_ADDRESS=${props_token_contract_address}" >> /home/ec2-user/.bashrc
-echo "export SAWTOOTH_PK=${sawtooth_pk}" >> /home/ec2-user/.bashrc
 echo "export VALIDATOR_SUBMISSION_PK=${validator_submission_pk}" >> /home/ec2-user/.bashrc
 echo "export ENVIRONMENT=${environment}" >> /home/ec2-user/.bashrc
 echo "export NODE_ENV=${environment}" >> /home/ec2-user/.bashrc

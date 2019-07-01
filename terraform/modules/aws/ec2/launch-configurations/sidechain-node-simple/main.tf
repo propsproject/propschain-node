@@ -20,7 +20,6 @@ data "template_file" "user_data" {
     environment                   = "${var.environment_name}"
     ethereum_url                  = "${var.ethereum_url}"
     props_token_contract_address  = "${var.props_token_contract_address}"
-    sawtooth_pk                   = "${var.sawtooth_pk}"
     validator_submission_pk       = "${var.validator_submission_pk}"
     which_docker_compose          = "${var.which_docker_compose}"
   }

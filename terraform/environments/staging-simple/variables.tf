@@ -42,10 +42,6 @@ variable "ethereum_url" {
   description = "The ethereum url to use (e.g infura)."
 }
 
-variable "sawtooth_pk" {
-  description = "The sawtooth pk to use"
-}
-
 variable "props_token_contract_address" {
   description = "The props token address"
 }

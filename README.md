@@ -61,7 +61,6 @@ Rewards engine configuration
 * instance_disk_size: how big should the disk be? 10 is a good starting number (e.g. **10**)
 * ethereum_url: this is the infura url (see requirements above) (e.g. **https://rinkeby.infura.io/v3/yourkeyhere>**)
 * props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
-* sawtooth_pk: the private key for sawtooth to use, contact us for this key
 * which_docker_compose: Keep the default value: **staging-simple**
 * validator_submission_pk: The cold wallet private key
 

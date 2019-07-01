@@ -39,10 +39,6 @@ variable "ethereum_url" {
 
 }
 
-variable "sawtooth_pk" {
-
-}
-
 variable "props_token_contract_address" {
 
 }
