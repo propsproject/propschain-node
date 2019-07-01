@@ -2,7 +2,7 @@
 
 ![Props Token](https://propsproject.com/static/images/main-logo.png)
 
-Everything that is needed to set up a sidechain node that connects to props
+Everything that is needed to set up a Rewards Engine Submissions instance or a PropsChain Node.
 
 WIP: This document is only for our staging node. Production configuration and instructions will come at a later time.
 
