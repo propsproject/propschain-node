@@ -33,5 +33,6 @@ services:
       - SAWTOOTH_REST_PORT
       - NODE_ENV
       - VALIDATOR_SUBMISSION_PK
+      - SECONDS_IN_DAY
     image: propsprojectservices/props-eth-sync:latest
     container_name: eth-sync

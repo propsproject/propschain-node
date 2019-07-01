@@ -53,3 +53,7 @@ variable "which_docker_compose" {
 variable "validator_submission_pk" {
   description = "The submission pk"
 }
+
+variable "seconds_in_day" {
+  description = "Second in day, for staging should be 3600"
+}

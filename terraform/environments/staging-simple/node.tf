@@ -17,4 +17,5 @@ module "node1" {
   props_token_contract_address  = "${var.props_token_contract_address}"
   which_docker_compose          = "${var.which_docker_compose}"
   validator_submission_pk       = "${var.validator_submission_pk}"
+  seconds_in_day                = "${var.seconds_in_day}"
 }

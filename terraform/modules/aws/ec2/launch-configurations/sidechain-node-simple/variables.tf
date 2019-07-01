@@ -62,3 +62,7 @@ variable "min_size" {
 variable "max_size" {
 
 }
+
+variable "seconds_in_day" {
+
+}

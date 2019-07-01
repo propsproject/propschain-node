@@ -22,6 +22,7 @@ data "template_file" "user_data" {
     props_token_contract_address  = "${var.props_token_contract_address}"
     validator_submission_pk       = "${var.validator_submission_pk}"
     which_docker_compose          = "${var.which_docker_compose}"
+    seconds_in_day                = "${var.seconds_in_day}"
   }
 }
 
