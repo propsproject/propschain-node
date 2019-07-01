@@ -57,7 +57,7 @@ AWS Configuration
 * ami: this is the AMI that the instance is based of, this is the official amazon linux image for AWS. Don't change this value.
 
 Node configuration
-* nodes_count: how many sidechains do you want to launch? (e.g. **1**)
+* nodes_count: how many reward instances do you want to launch? (e.g. **1**)
 * instance_disk_size: how big should the disk be? 10 is a good starting number (e.g. **10**)
 * ethereum_url: this is the infura url (see requirements above) (e.g. **https://rinkeby.infura.io/v3/yourkeyhere>**)
 * props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
