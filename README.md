@@ -56,7 +56,7 @@ AWS Configuration
 * subnet_ids: the subnets (comma separated) in which you want to create your instances, I suggest taking the default AWS public subnets, (e.g **subnet-abcdefgh,subnet-ijklmnop**)
 * ami: this is the AMI that the instance is based of, this is the official amazon linux image for AWS. Don't change this value.
 
-Node configuration
+Rewards engine configuration
 * nodes_count: how many reward instances do you want to launch? (e.g. **1**)
 * instance_disk_size: how big should the disk be? 10 is a good starting number (e.g. **10**)
 * ethereum_url: this is the infura url (see requirements above) (e.g. **https://rinkeby.infura.io/v3/yourkeyhere>**)
