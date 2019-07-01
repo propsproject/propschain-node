@@ -4,7 +4,7 @@
 
 Everything that is needed to set up a Rewards Engine Submissions instance or a PropsChain Node.
 
-WIP: This document is only for our staging node. Production configuration and instructions will come at a later time.
+WIP: This document is only for our staging environment. Production configuration and instructions will come at a later time.
 
 ## Description
 
