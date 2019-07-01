@@ -1,0 +1,27 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Configuration for variables that will be used throughout the infrastructure. Variable definition can be found
+// in the root directory variables.tf
+// -------------------------------------------------------------------------------------------------------------------
+
+// General information
+app_name                = "sawtooth-simple"
+environment_name        = "staging"
+key_name                = "sawtooth-staging"
+
+// AWS
+aws_region              = "us-east-1"
+aws_availability_zones  = "us-east-1a,us-east-1b,us-east-1c"
+vpc_id                  = "" // The default vpc
+subnet_ids              = ""
+
+// Other
+ami                     = "ami-0ff8a91507f77f867"
+
+// Node configuration
+nodes_count                     = "1"
+instance_disk_size              = "40"
+ethereum_url                    = "https://rinkeby.infura.io/v3/<yourkeyhere>"
+props_token_contract_address    = "0x4dd1c86de2bc220611bd869c6fa14f62f16c0743"
+sawtooth_pk                     = ""
+which_docker_compose            = "staging-simple"
+validator_submission_pk         = ""
