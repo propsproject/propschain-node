@@ -18,7 +18,7 @@ You're not obligated to use these terraform files, you can use them as a guide t
 * ***/terraform/environments***: contains folders for each environment (staging, production, etc) with the terraform configuration for each environment 
 * ***/terraform/modules***: custom terraform modules
 
-## A. Creating the rewards engine
+## A. Rewards Engine Submissions
 
 ### Requirements
 
@@ -96,7 +96,7 @@ Read the section of doing the validator setup on https://github.com/propsproject
 
 ---
 
-## B. Creating a validator
+## B. PropsChain Node Operation
 
 ### Requirements
 
