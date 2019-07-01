@@ -19,7 +19,7 @@ ami                     = "ami-0ff8a91507f77f867"
 
 // Node configuration
 nodes_count                     = "1"
-instance_disk_size              = "40"
+instance_disk_size              = "10"
 ethereum_url                    = "https://rinkeby.infura.io/v3/<yourkeyhere>"
 props_token_contract_address    = "0x4dd1c86de2bc220611bd869c6fa14f62f16c0743"
 sawtooth_pk                     = ""

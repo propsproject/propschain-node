@@ -15,7 +15,7 @@ variable "ami" {
 }
 
 variable "instance_type" {
-  default = "m4.xlarge"
+  default = "t2.micro"
   description = "The size of the machine"
 }
 
@@ -52,5 +52,17 @@ variable "which_docker_compose" {
 }
 
 variable "validator_submission_pk" {
+
+}
+
+variable "desired_capacity" {
+
+}
+
+variable "min_size" {
+
+}
+
+variable "max_size" {
 
 }

@@ -18,6 +18,86 @@ You're not obligated to use these terraform files, you can use them as a guide t
 * ***/terraform/environments***: contains folders for each environment (staging, production, etc) with the terraform configuration for each environment 
 * ***/terraform/modules***: custom terraform modules
 
+## A. Creating the rewards engine
+
+### Requirements
+
+* You need to create a free infura account (https://infura.io/)
+
+#### 1. Preparation
+
+Install terraform from https://www.terraform.io/downloads.html
+
+Create a new AWS profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+```
+$ aws configure --profile sidechain-staging
+``` 
+
+Copy the terraform.tfvars template
+
+```
+$ cd terraform/environments/staging-simple
+$ cp terraform.tfvars.tmp terraform.tfvars
+```
+
+In AWS console create a new key pair (EC2 -> Network & Security -> Key Pairs -> Create Key Pair) and name the key pair ***sawtooth-staging***. You can choose another name if you prefer, but make sure you modify the **key_name** variable in the next step.
+
+#### 2. Configuration for the staging node
+
+Modify the terraform.tfvars file with your settings. We provide you with a couple of default values. Here's an overview of the variables that you might want or will have to change.
+
+Examples are given after each variable
+
+AWS Configuration
+* aws_region: the aws region in which you want to spawn the instances. (e.g. **us-east-1**)
+* aws_availability_zones: choose the availability zones that for the instances, comma separated. (e.g. **us-east-1a,us-east-1b,us-east-1c**)
+* vpc_id: the VPC in which you want to create your instances. The default AWS VPC is always a good starting point. (e.g **vpc-abcdefgh**)
+* subnet_ids: the subnets (comma separated) in which you want to create your instances, I suggest taking the default AWS public subnets, (e.g **subnet-abcdefgh,subnet-ijklmnop**)
+* ami: this is the AMI that the instance is based of, this is the official amazon linux image for AWS. Don't change this value.
+
+Node configuration
+* nodes_count: how many sidechains do you want to launch? (e.g. **1**)
+* instance_disk_size: how big should the disk be? 10 is a good starting number (e.g. **10**)
+* ethereum_url: this is the infura url (see requirements above) (e.g. **https://rinkeby.infura.io/v3/yourkeyhere>**)
+* props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
+* sawtooth_pk: the private key for sawtooth to use, contact us for this key
+* which_docker_compose: Keep the default value: **staging-simple**
+* validator_submission_pk: The cold wallet private key
+
+Once you have modified terraform.tfvars we can now create the instance
+
+#### 3. Terraforming
+
+Initialize terraform
+
+```
+$ cd terraform/environments/staging-simple
+$ terraform init
+```
+
+Create your infrastructure
+
+```
+$ terraform apply
+```
+
+#### 4. Finishing up and 
+
+Read the section of doing the validator setup on https://github.com/propsproject/props-ethsync
+
+* ssh into the instance that was created
+* run the following
+
+```
+/usr/local/bin/docker-compose -f /opt/sawtooth/docker/${which_docker_compose}/docker-compose.yaml run --entrypoint "npm run setup-validator -- {validatorName} {rewardsAddress} {sidechainAddress}" eth-sync
+```
+
+
+---
+
+## B. Creating a validator
+
 ### Requirements
 
 * You need to create a free infura account (https://infura.io/)
