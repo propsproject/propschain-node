@@ -89,7 +89,7 @@ Read the section of doing the validator setup on https://github.com/propsproject
 * run the following
 
 ```
-/usr/local/bin/docker-compose -f /opt/sawtooth/docker/${which_docker_compose}/docker-compose.yaml run --entrypoint "npm run setup-validator -- {validatorName} {rewardsAddress} {sidechainAddress}" eth-sync
+/usr/local/bin/docker-compose -f /opt/sawtooth/docker/staging-simple/docker-compose.yaml run --entrypoint "npm run setup-validator -- {validatorName} {rewardsAddress} {sidechainAddress}" eth-sync
 ```
 
 
