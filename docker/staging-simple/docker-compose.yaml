@@ -34,5 +34,5 @@ services:
       - NODE_ENV
       - VALIDATOR_SUBMISSION_PK
       - SECONDS_IN_DAY
-    image: propsprojectservices/props-eth-sync:latest
+    image: propsprojectservices/props-ethsync:latest
     container_name: eth-sync

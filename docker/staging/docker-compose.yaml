@@ -62,7 +62,7 @@ services:
       - SAWTOOTH_REST_URL
       - SAWTOOTH_REST_PORT
       - NODE_ENV
-    image: propsprojectservices/props-eth-sync:latest
+    image: propsprojectservices/props-ethsync:latest
     container_name: eth-sync
     depends_on:
       - validator
