@@ -57,3 +57,11 @@ variable "validator_submission_pk" {
 variable "seconds_in_day" {
   description = "Second in day, for staging should be 3600"
 }
+
+variable "frequency_hours" {
+  description = "What hour do you want to run rewards in the cronjob, default *"
+}
+
+variable "frequency_minutes" {
+  description = "What minute do you want to run rewards in the cronjob, default 5"
+}

@@ -18,4 +18,6 @@ module "node1" {
   which_docker_compose          = "${var.which_docker_compose}"
   validator_submission_pk       = "${var.validator_submission_pk}"
   seconds_in_day                = "${var.seconds_in_day}"
+  frequency_hours               = "${var.frequency_hours}"
+  frequency_minutes             = "${var.frequency_minutes}"
 }

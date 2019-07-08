@@ -66,3 +66,11 @@ variable "max_size" {
 variable "seconds_in_day" {
 
 }
+
+variable "frequency_hours" {
+  default = "*"
+}
+
+variable "frequency_minutes" {
+  default = "5"
+}

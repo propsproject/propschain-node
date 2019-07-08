@@ -23,6 +23,8 @@ data "template_file" "user_data" {
     validator_submission_pk       = "${var.validator_submission_pk}"
     which_docker_compose          = "${var.which_docker_compose}"
     seconds_in_day                = "${var.seconds_in_day}"
+    frequency_hours               = "${var.frequency_hours}"
+    frequency_minutes             = "${var.frequency_minutes}"
   }
 }
 
