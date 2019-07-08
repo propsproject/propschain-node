@@ -95,7 +95,7 @@ Rewards engine configuration
 * ethereum_url: this is the infura url (see requirements above) (e.g. **https://rinkeby.infura.io/v3/yourkeyhere>**)
 * props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
 * which_docker_compose: Keep the default value: **staging-simple**
-* validator_submission_pk: The cold wallet private key
+* validator_submission_pk: The 'main wallet' private key
 
 Once you have modified terraform.tfvars we can now create the instance
 
@@ -183,7 +183,7 @@ Node configuration
 * etherscan_api_key: this is the etherscan api key, see requirements above
 * props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
 * props_token_deployed_block: the blockId of the contract address. The default value is good
-* sawtooth_pk: the private key for sawtooth to use, contact us for this key
+* sawtooth_pk: the private key of the 'sidechain wallet', for sawtooth to use
 * validator_url: the default value is good, will need to be removed at some point
 * network_private_key: the zeromq private key, you need to contact us for this key
 * network_public_key: the zeromq public key, you need to contact us for this key
@@ -238,12 +238,11 @@ You need the set the following environment variables on your instance
 
 * VALIDATOR_URL=tcp://validator:4004
 * ETHEREUM_URL=https://rinkeby.infura.io/v3/<yourkeyhere>
-* PROPS_TOKEN_CONTRACT_ADDRESS=0x98f8ab77be1658b398f050338b0c6f3f6c025d4a
+* PROPS_TOKEN_CONTRACT_ADDRESS=0x4dd1c86de2bc220611bd869c6fa14f62f16c0743
 * PUBLIC_IP_ADDRESS: This is the public IP address of your instance
-* SAWTOOTH_PK: Contact us for this key
+* SAWTOOTH_PK: Private key of your 'sidechain wallet'
 * NETWORK_PUBLIC_KEY: Contact us for this key
 * NETWORK_PRIVATE_KEY: Contact us for this key
-* PROPS_TOKEN_CONTRACT_ADDRESS=0x98f8ab77be1658b398f050338b0c6f3f6c025d4a
 * ETHERSCAN_URL=https://rinkeby.infura.io/v3/yourkeyhere
 * ETHERSCAN_API: your api key here
 * PROPS_TOKEN_DEPLOYED_BLOCK=3950142
