@@ -1,5 +1,28 @@
 # sidechain-node
 
+- [Description](#description)
+	- [Folder structure](#folder-structure)
+- [A. Rewards Engine Submissions](#a-rewards-engine-submissions)
+	- [Differences between production and staging configurations](#differences-between-production-and-staging-configurations)
+	- [Requirements](#requirements)
+		- [1. Preparation](#1-preparation)
+		- [2. Configuration for the staging node](#2-configuration-for-the-staging-node)
+		- [3. Terraforming](#3-terraforming)
+		- [4. Finishing up and](#4-finishing-up-and)
+- [B. PropsChain Node Operation](#b-propschain-node-operation)
+	- [Requirements](#requirements-1)
+	- [Terraform](#terraform)
+		- [1. Preparation](#1-preparation-1)
+		- [2. Configuration for the staging node](#2-configuration-for-the-staging-node-1)
+		- [3. Terraforming](#3-terraforming-1)
+		- [4. Finishing up and checking your instance](#4-finishing-up-and-checking-your-instance)
+	- [Docker](#docker)
+		- [1. Preparation](#1-preparation-2)
+		- [2. Environment variables](#2-environment-variables)
+		- [3. Running your instance](#3-running-your-instance)
+		- [4. Finishing up and checking your instance](#4-finishing-up-and-checking-your-instance-1)
+	- [Conclusion](#conclusion)
+
 ![Props Token](https://propsproject.com/static/images/main-logo.png)
 
 Everything that is needed to set up a Rewards Engine Submissions instance or a PropsChain Node.
@@ -24,10 +47,11 @@ You're not obligated to use these terraform files, you can use them as a guide t
 
 Staging and production share a lot of the same configuration, but the following variables (to be set in terraform.tfvars) are different
 
-* props_token_contract_address
-* ethereum_url
-* seconds_in_day
-* which_docker_compose
+* for production use terraform/environments/production-simple
+* props_token_contract_address (check terraform.tfvars.tmp)
+* ethereum_url (check terraform.tfvars.tmp)
+* seconds_in_day (check terraform.tfvars.tmp)
+* which_docker_compose (check terraform.tfvars.tmp)
 
 ### Requirements
 
