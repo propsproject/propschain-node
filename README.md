@@ -4,7 +4,7 @@
 
 Everything that is needed to set up a Rewards Engine Submissions instance or a PropsChain Node.
 
-WIP: This document is only for our staging environment. Production configuration and instructions will come at a later time.
+WIP: This document is only for our staging/production environments.
 
 ## Description
 
@@ -19,6 +19,15 @@ You're not obligated to use these terraform files, you can use them as a guide t
 * ***/terraform/modules***: custom terraform modules
 
 ## A. Rewards Engine Submissions
+
+### Differences between production and staging configurations
+
+Staging and production share a lot of the same configuration, but the following variables (to be set in terraform.tfvars) are different
+
+* props_token_contract_address
+* ethereum_url
+* seconds_in_day
+* which_docker_compose
 
 ### Requirements
 
