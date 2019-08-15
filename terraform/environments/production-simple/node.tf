@@ -20,4 +20,8 @@ module "node1" {
   seconds_in_day                = "${var.seconds_in_day}"
   frequency_hours               = "${var.frequency_hours}"
   frequency_minutes             = "${var.frequency_minutes}"
+  rewards_start_timestamp       = "${var.rewards_start_timestamp}"
+  sawtooth_rest_url             = "${var.sawtooth_rest_url}"
+  sawtooth_rest_port            = "${var.sawtooth_rest_port}"
+  sawtooth_rest_https           = "${var.sawtooth_rest_https}"
 }

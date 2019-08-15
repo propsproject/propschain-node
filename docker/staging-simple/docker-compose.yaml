@@ -31,8 +31,10 @@ services:
       - VALIDATOR_URL
       - SAWTOOTH_REST_URL
       - SAWTOOTH_REST_PORT
+      - SAWTOOTH_REST_HTTPS
+      - REWARDS_START_TIMESTAMP
       - NODE_ENV
       - VALIDATOR_SUBMISSION_PK
       - SECONDS_IN_DAY
-    image: propsprojectservices/props-ethsync:latest
+    image: propsprojectservices/props-ethsync:1.1
     container_name: eth-sync

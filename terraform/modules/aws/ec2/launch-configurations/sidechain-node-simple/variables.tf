@@ -74,3 +74,19 @@ variable "frequency_hours" {
 variable "frequency_minutes" {
   default = "5"
 }
+
+variable "rewards_start_timestamp" {
+  description = "The start timestamp of the rewards"
+}
+
+variable "sawtooth_rest_url" {
+  description = "The sawtooth rest url"
+}
+
+variable "sawtooth_rest_port" {
+  description = "The sawtooth rest port"
+}
+
+variable "sawtooth_rest_https" {
+  description = "True or false"
+}

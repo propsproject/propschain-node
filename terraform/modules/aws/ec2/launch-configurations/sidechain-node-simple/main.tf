@@ -18,6 +18,7 @@ data "template_file" "user_data" {
 
   vars = {
     environment                   = "${var.environment_name}"
+    app_name                      = "${var.app_name}"
     ethereum_url                  = "${var.ethereum_url}"
     props_token_contract_address  = "${var.props_token_contract_address}"
     validator_submission_pk       = "${var.validator_submission_pk}"
@@ -25,6 +26,10 @@ data "template_file" "user_data" {
     seconds_in_day                = "${var.seconds_in_day}"
     frequency_hours               = "${var.frequency_hours}"
     frequency_minutes             = "${var.frequency_minutes}"
+    rewards_start_timestamp       = "${var.rewards_start_timestamp}"
+    sawtooth_rest_url             = "${var.sawtooth_rest_url}"
+    sawtooth_rest_port            = "${var.sawtooth_rest_port}"
+    sawtooth_rest_https           = "${var.sawtooth_rest_https}"
   }
 }
 
@@ -91,5 +96,14 @@ resource "aws_autoscaling_group" "sidechain_asg" {
 
   lifecycle {
     create_before_destroy = true
+  }
+}
+
+resource "aws_eip" "sidechain_eip" {
+  count = "${var.min_size}"
+
+  tags = {
+    Environment = "${var.environment_name}"
+    App         = "${var.app_name}"
   }
 }

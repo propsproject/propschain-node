@@ -16,6 +16,14 @@ chown ec2-user:ec2-user /opt/sawtooth
 
 runuser -l ec2-user -c "git clone https://github.com/propsproject/sidechain-node.git /opt/sawtooth"
 
+INSTANCE_ID=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id`
+
+ALLOCATION_ID=`aws ec2 describe-addresses --region us-east-1 --filters="Name=tag:Environment,Values=${environment},Name=tag:App,Values=${app_name}" | jq -r '.Addresses[] | "\(.InstanceId) \(.AllocationId)"' | grep null | awk '{print $2}' | xargs shuf -n1 -e`
+
+if [ ! -z $ALLOCATION_ID ]; then
+    aws ec2 associate-address --instance-id $INSTANCE_ID --allocation-id $ALLOCATION_ID --allow-reassociation
+fi
+
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
@@ -25,6 +33,10 @@ echo "export VALIDATOR_SUBMISSION_PK=${validator_submission_pk}" >> /home/ec2-us
 echo "export ENVIRONMENT=${environment}" >> /home/ec2-user/.bashrc
 echo "export SECONDS_IN_DAY=${seconds_in_day}" >> /home/ec2-user/.bashrc
 echo "export NODE_ENV=${environment}" >> /home/ec2-user/.bashrc
+echo "export REWARDS_START_TIMESTAMP=${rewards_start_timestamp}" >> /home/ec2-user/.bashrc
+echo "export SAWTOOTH_REST_URL=${sawtooth_rest_url}" >> /home/ec2-user/.bashrc
+echo "export SAWTOOTH_REST_PORT=${sawtooth_rest_port}" >> /home/ec2-user/.bashrc
+echo "export SAWTOOTH_REST_HTTPS=${sawtooth_rest_https}" >> /home/ec2-user/.bashrc
 
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
 
