@@ -2,7 +2,7 @@
 
 yum update -y
 
-yum install git docker wget "Development Tools" gcc -y
+yum install git docker wget "Development Tools" gcc jq -y
 yum install /usr/bin/g++ -y
 amazon-linux-extras | grep nginx | awk '{print $2}' | xargs -n 1 amazon-linux-extras install
 
@@ -21,13 +21,13 @@ INSTANCE_ID=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/instance-i
 ALLOCATION_ID=`aws ec2 describe-addresses --region us-east-1 --filters="Name=tag:Environment,Values=${environment},Name=tag:App,Values=${app_name}" | jq -r '.Addresses[] | "\(.InstanceId) \(.AllocationId)"' | grep null | awk '{print $2}' | xargs shuf -n1 -e`
 
 if [ ! -z $ALLOCATION_ID ]; then
-    aws ec2 associate-address --instance-id $INSTANCE_ID --allocation-id $ALLOCATION_ID --allow-reassociation
+    aws ec2 associate-address --region us-east-1 --instance-id $INSTANCE_ID --allocation-id $ALLOCATION_ID --allow-reassociation
 fi
 
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-echo "export ETHEREUM_URL=${ethereum_url}" >> /home/ec2-user/.bashrc
+echo "export ETHEREUM_URL_ETHSYNC=${ethereum_url}" >> /home/ec2-user/.bashrc
 echo "export PROPS_TOKEN_CONTRACT_ADDRESS=${props_token_contract_address}" >> /home/ec2-user/.bashrc
 echo "export VALIDATOR_SUBMISSION_PK=${validator_submission_pk}" >> /home/ec2-user/.bashrc
 echo "export ENVIRONMENT=${environment}" >> /home/ec2-user/.bashrc

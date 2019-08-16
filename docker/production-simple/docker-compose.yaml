@@ -25,14 +25,16 @@ services:
       - ETHERSCAN_API_KEY
       - PROPS_TOKEN_CONTRACT_ADDRESS
       - SAWTOOTH_PK
-      - ETHEREUM_URL
+      - ETHEREUM_URL_ETHSYNC
       - ETHEREUM_CONFIRMATION_BLOCKS
       - PROPS_TOKEN_DEPLOYED_BLOCK
       - VALIDATOR_URL
       - SAWTOOTH_REST_URL
       - SAWTOOTH_REST_PORT
+      - SAWTOOTH_REST_HTTPS
+      - REWARDS_START_TIMESTAMP
       - NODE_ENV
       - VALIDATOR_SUBMISSION_PK
       - SECONDS_IN_DAY
-    image: propsprojectservices/props-ethsync:latest
+    image: propsprojectservices/props-ethsync:1.1
     container_name: eth-sync

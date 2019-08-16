@@ -25,3 +25,7 @@ module "node1" {
   sawtooth_rest_port            = "${var.sawtooth_rest_port}"
   sawtooth_rest_https           = "${var.sawtooth_rest_https}"
 }
+
+output "node_ip" {
+  value = "${module.node1.node_ip}"
+}
