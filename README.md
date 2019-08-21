@@ -96,6 +96,13 @@ Rewards engine configuration
 * props_token_contract_address: the address of the props token contract address on rinkeby. The default value is good
 * which_docker_compose: Keep the default value: **staging-simple**
 * validator_submission_pk: The 'main wallet' private key
+* seconds_in_day: **3600**
+* frequency_hours: *
+* frequency_minutes: **5**
+* rewards_start_timestamp: **1561248000** (for staging, check terraformtfvars.tmp in production-simple for production values)
+* sawtooth_rest_url: **staging-api.sidechain.propsproject.io** (for staging, check terraformtfvars.tmp in production-simple for production values)
+* sawtooth_rest_port: **443**
+* sawtooth_rest_https: **true**
 
 Once you have modified terraform.tfvars we can now create the instance
 
