@@ -1,0 +1,42 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Configuration for variables that will be used throughout the infrastructure. Variable definition can be found
+// in the root directory variables.tf
+// -------------------------------------------------------------------------------------------------------------------
+
+// General information
+app_name                = "sawtooth"
+environment_name        = "playground"
+key_name                = "sawtooth-playground"
+
+// AWS
+aws_region              = "us-east-1"
+aws_availability_zones  = "us-east-1a,us-east-1b,us-east-1c"
+vpc_id                  = "" // The default vpc
+subnet_ids              = ""
+
+// Other
+ami                     = "ami-0ff8a91507f77f867"
+
+// Node configuration
+nodes_count                     = "1"
+instance_disk_size              = "40"
+ethereum_confirmation_block     = "15"
+ethereum_url                    = "https://rinkeby.infura.io/v3/<yourkeyhere>"
+etherscan_api_key               = ""
+etherscan_url                   = "https://api-rinkeby.etherscan.io/api"
+props_token_contract_address    = "0x4dd1c86de2bc220611bd869c6fa14f62f16c0743"
+props_token_deployed_block      = "4610151"
+sawtooth_pk                     = ""
+validator_url                   = "tcp://validator:4004"
+network_private_key             = ""
+network_public_key              = ""
+sawtooth_rest_port              = "8008"
+sawtooth_rest_url               = "rest-api"
+validator_seed_url              = "tcp://validator.playground.sidechain.propsproject.io:8800"
+frequency_hours                 = "*"
+frequency_minutes               = "5"
+rewards_start_timestamp         = "1568553941"
+sawtooth_rest_https             = "true"
+seconds_in_day                  = "3600"
+validator_submission_pk         = ""
+which_docker_compose            = "playground"

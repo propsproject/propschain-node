@@ -15,7 +15,7 @@ variable "ami" {
 }
 
 variable "instance_type" {
-  default = "m4.xlarge"
+  default = "t2.micro"
   description = "The size of the machine"
 }
 
@@ -87,6 +87,22 @@ variable "max_size" {
 
 }
 
+variable "seconds_in_day" {
+
+}
+
+variable "frequency_hours" {
+  default = "*"
+}
+
+variable "frequency_minutes" {
+  default = "5"
+}
+
+variable "rewards_start_timestamp" {
+  description = "The start timestamp of the rewards"
+}
+
 variable "sawtooth_rest_url" {
 
 }
@@ -97,4 +113,16 @@ variable "sawtooth_rest_port" {
 
 variable "validator_seed_url" {
 
+}
+
+variable "which_docker_compose" {
+
+}
+
+variable "validator_submission_pk" {
+
+}
+
+variable "sawtooth_rest_https" {
+  description = "True or false"
 }
