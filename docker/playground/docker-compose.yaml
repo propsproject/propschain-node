@@ -124,7 +124,7 @@ services:
 
   shell:
     restart: always
-    image: hyperledger/sawtooth-all:1.2.2
+    image: hyperledger/sawtooth-shell:1.2.2
     container_name: sawtooth-shell-default
     depends_on:
       - rest-api
