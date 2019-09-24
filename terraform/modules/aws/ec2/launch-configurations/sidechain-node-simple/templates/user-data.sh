@@ -37,6 +37,7 @@ echo "export REWARDS_START_TIMESTAMP=${rewards_start_timestamp}" >> /home/ec2-us
 echo "export SAWTOOTH_REST_URL=${sawtooth_rest_url}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_PORT=${sawtooth_rest_port}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_HTTPS=${sawtooth_rest_https}" >> /home/ec2-user/.bashrc
+echo "export STATE_API_URI=${state_api_url}" >> /home/ec2-user/.bashrc
 
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
 

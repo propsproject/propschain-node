@@ -81,3 +81,8 @@ variable "sawtooth_rest_port" {
 variable "sawtooth_rest_https" {
   description = "True or false"
 }
+
+variable "state_api_url" {
+  description = "Url for state api activity summary"
+}
+

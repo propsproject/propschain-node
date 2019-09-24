@@ -126,3 +126,7 @@ variable "validator_submission_pk" {
 variable "sawtooth_rest_https" {
   description = "True or false"
 }
+
+variable "state_api_url" {
+  description = "Url for state api activity summary"
+}

@@ -39,6 +39,7 @@ data "template_file" "user_data" {
     sawtooth_rest_port            = "${var.sawtooth_rest_port}"
     validator_seed_url            = "${var.validator_seed_url}"
     sawtooth_rest_https           = "${var.sawtooth_rest_https}"
+    state_api_url                 = "${var.state_api_url}"
   }
 }
 
