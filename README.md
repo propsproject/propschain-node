@@ -29,6 +29,39 @@ Everything that is needed to set up a Rewards Engine Submissions instance or a P
 
 WIP: This document is only for our staging/production environments.
 
+## Change logs
+### 24-09-2019
+- Added S3 state files. This will save the terraform.tfstate files on S3 instead of your local machine. Create a new bucket on s3, something like companyname-propschain-states. Then in your main.tf file change the bucket to this name in the s3 backend resource. For example this is the state file for the ***staging-simple*** environment
+
+```yaml
+terraform {
+  backend "s3" {
+    bucket                 = "companyname-propschain-states"
+    key                    = "staging-simple"
+    region                 = "us-east-1"
+    skip_region_validation = true
+    workspace_key_prefix   = "infrastructure"
+    profile                = "sidechain-staging"
+    dynamodb_table         = "terraform-state-lock-dynamo"
+  }
+}
+```
+
+After you're done you can type `terraform init`. Terraform will ask the following, confirm with yes.
+
+```
+Do you want to copy existing state to the new backend?
+  Pre-existing state was found while migrating the previous "local" backend to the
+  newly configured "s3" backend. No existing state was found in the newly
+  configured "s3" backend. Do you want to copy this state to the new "s3"
+  backend? Enter "yes" to copy and "no" to start with an empty state.
+
+  Enter a value: yes
+
+```
+
+- Added a new variable `state_api_url` in terraform.tfvars.tmp, copy this line to your terraform.tfvars file and do `terraform apply`
+
 ## Description
 
 We are using AWS as our cloud provider, thus we provide you with a terraform setup that allows you to quickly create a launch configuration. This launch configuration creates an instance with a sidechain node.

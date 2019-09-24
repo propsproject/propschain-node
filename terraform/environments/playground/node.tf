@@ -34,4 +34,5 @@ module "node1" {
   sawtooth_pk                   = "${var.sawtooth_pk}"
   validator_seed_url            = "${var.validator_seed_url}"
   validator_url                 = "${var.validator_url}"
+  state_api_url                 = ""
 }

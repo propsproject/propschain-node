@@ -13,7 +13,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket                 = "propschain-nodes"
-    key                    = "staging-simple"
+    key                    = "staging-simple-2"
     region                 = "us-east-1"
     skip_region_validation = true
     workspace_key_prefix   = "infrastructure"

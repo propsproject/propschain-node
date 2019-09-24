@@ -24,4 +24,5 @@ module "node1" {
   sawtooth_rest_url             = "${var.sawtooth_rest_url}"
   sawtooth_rest_port            = "${var.sawtooth_rest_port}"
   sawtooth_rest_https           = "${var.sawtooth_rest_https}"
+  state_api_url                 = "${var.state_api_url}"
 }
