@@ -4,7 +4,7 @@
 provider "aws" {
   region                  = "${var.aws_region}"
   shared_credentials_file = "~/.aws/credentials"
-  profile                 = "sidechain-staging"
+  profile                 = "sidechain-production"
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -13,11 +13,11 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket                 = "propschain-nodes"
-    key                    = "playground"
+    key                    = "production-nodeonly"
     region                 = "us-east-1"
     skip_region_validation = true
     workspace_key_prefix   = "infrastructure"
-    profile                = "sidechain-staging"
+    profile                = "sidechain-production"
     dynamodb_table         = "terraform-state-lock-dynamo"
   }
 }

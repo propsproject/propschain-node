@@ -51,6 +51,28 @@ echo "export STATE_API_URI=${state_api_url}" >> /home/ec2-user/.bashrc
 PUBLIC_IP=`aws ec2 describe-addresses --region us-east-1 --allocation-ids $ALLOCATION_ID | jq -r '.Addresses[0].PublicIp'`
 echo "export PUBLIC_IP_ADDRESS=$PUBLIC_IP" >> /home/ec2-user/.bashrc
 
+SAWTOOTH_HOME='/etc/sawtooth'
+
+if [ ! -e "$SAWTOOTH_HOME/logs" ]; then
+    mkdir -p $SAWTOOTH_HOME/logs
+fi
+
+if [ ! -e "$SAWTOOTH_HOME/keys" ]; then
+    mkdir -p $SAWTOOTH_HOME/keys
+fi
+
+if [ ! -e "$SAWTOOTH_HOME/policy" ]; then
+    mkdir -p $SAWTOOTH_HOME/policy
+fi
+
+if [ ! -e "$SAWTOOTH_HOME/data" ]; then
+    mkdir -p $SAWTOOTH_HOME/data
+fi
+
+if [ ! -e "$SAWTOOTH_HOME/etc" ]; then
+    mkdir -p $SAWTOOTH_HOME/etc
+fi
+
 croncmd=". \$HOME/.bash_profile; /usr/local/bin/docker-compose -f /opt/sawtooth/docker/${which_docker_compose}/docker-compose.yaml run --entrypoint \"npm run submit-rewards\" eth-sync >> /tmp/rewards.log 2>&1"
 cronjob="${frequency_minutes} ${frequency_hours} * * * $croncmd"
 ( crontab -u ec2-user -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -u ec2-user -

@@ -117,7 +117,3 @@ resource "aws_eip" "sidechain_eip" {
     App         = "${var.app_name}"
   }
 }
-
-resource "aws_ebs_volume" {
-  availability_zone = ""
-}
