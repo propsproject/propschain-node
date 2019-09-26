@@ -73,8 +73,8 @@ services:
           --bind network:tcp://eth0:8800 \
           --bind consensus:tcp://eth0:5050 \
           --scheduler parallel \
-          -P dynamic \
-          --seeds $VALIDATOR_SEED_URL
+          -P static \
+          --peers $VALIDATOR_SEED_URL
         \""
     volumes:
       - poet-shared:/poet-shared
