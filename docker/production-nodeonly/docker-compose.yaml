@@ -1,0 +1,117 @@
+# Copyright 2017 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ------------------------------------------------------------------------------
+
+version: "2.1"
+
+volumes:
+  poet-shared:
+
+services:
+  settings-tp:
+    image: hyperledger/sawtooth-settings-tp:1.2.2
+    container_name: sawtooth-settings-tp-default
+    restart: always
+    depends_on:
+      - validator
+    entrypoint: settings-tp -vv -C tcp://validator:4004
+
+  pbft:
+    image: hyperledger/sawtooth-pbft-engine:1.0.0
+    container_name: sawtooth-pbft-engine
+    restart: always
+    expose:
+      - 5050
+    depends_on:
+      - validator
+    entrypoint: pbft-engine -vv -C tcp://validator:5050
+
+  pending-props-tp:
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  validator:
+    restart: always
+    image: hyperledger/sawtooth-validator:1.2.2
+    container_name: sawtooth-validator-default
+    expose:
+      - 4004
+      - 8800
+      - 5050
+    ports:
+      - "4004:4004"
+      - "8800:8800"
+      - "5050:5050"
+    # start the validator with an empty genesis batch
+    entrypoint: "bash -c \"\
+        apt-get update && apt-get install -y wget && \
+        sawadm keygen --force && \
+        mkdir -p /poet-shared/validator || true && \
+        cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
+        sawtooth-validator -vv \
+          --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
+          --bind component:tcp://eth0:4004 \
+          --bind network:tcp://eth0:8800 \
+          --bind consensus:tcp://eth0:5050 \
+          --scheduler parallel \
+          -P dynamic \
+          --seeds $VALIDATOR_SEED_URL
+        \""
+    volumes:
+      - poet-shared:/poet-shared
+      - /opt/sawtooth:/etc/sawtooth
+    environment:
+      - PUBLIC_IP_ADDRESS
+      - NETWORK_PUBLIC_KEY
+      - NETWORK_PRIVATE_KEY
+      - VALIDATOR_SEED_URL
+      - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
+    stop_signal: SIGKILL
+
+  sawtooth-identity:
+    restart: always
+    image: hyperledger/sawtooth-identity-tp:1.2.2
+    container_name: sawtooth-identity
+    depends_on:
+      - validator
+    entrypoint: identity-tp -v -C tcp://validator:4004
+
+  rest-api:
+    restart: always
+    image: hyperledger/sawtooth-rest-api:1.2.2
+    container_name: sawtooth-rest-api-default
+    ports:
+      - "8008:8008"
+    depends_on:
+      - validator
+    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+
+  shell:
+    restart: always
+    image: hyperledger/sawtooth-shell:1.2.2
+    container_name: sawtooth-shell-default
+    depends_on:
+      - rest-api
+    entrypoint: "bash -c \"\
+        sawtooth keygen && \
+        tail -f /dev/null \
+        \""
