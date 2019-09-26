@@ -64,9 +64,7 @@ services:
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
-        if [ ! -e $SAWTOOTH_HOME/keys/validator.priv ]; then \\
-          sawadm keygen; \\
-        fi \\
+        if [ ! -e $SAWTOOTH_HOME/keys/validator.priv ]; then sawadm keygen; fi && \
         mkdir -p /poet-shared/validator || true && \
         cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
         sawtooth-validator -vv \
@@ -80,7 +78,7 @@ services:
         \""
     volumes:
       - poet-shared:/poet-shared
-      - /opt/sawtooth:/etc/sawtooth
+      - /etc/sawtooth:/etc/sawtooth
     environment:
       - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY

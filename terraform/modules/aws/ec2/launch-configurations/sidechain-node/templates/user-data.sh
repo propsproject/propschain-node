@@ -73,6 +73,9 @@ if [ ! -e "$SAWTOOTH_HOME/etc" ]; then
     mkdir -p $SAWTOOTH_HOME/etc
 fi
 
+chmod -R 775 /etc/sawtooth
+chown ec2-user:ec2-user /etc/sawtooth -R
+
 croncmd=". \$HOME/.bash_profile; /usr/local/bin/docker-compose -f /opt/sawtooth/docker/${which_docker_compose}/docker-compose.yaml run --entrypoint \"npm run submit-rewards\" eth-sync >> /tmp/rewards.log 2>&1"
 cronjob="${frequency_minutes} ${frequency_hours} * * * $croncmd"
 ( crontab -u ec2-user -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -u ec2-user -
