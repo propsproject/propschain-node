@@ -149,6 +149,7 @@ services:
           apt-get update && apt-get install -y wget && \
           wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
           sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/validator.toml && \
+          mv /etc/sawtooth/validator.toml /etc/sawtooth/rest_api.toml && \
           sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
         \""
 
