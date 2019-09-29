@@ -90,9 +90,9 @@ services:
         apt-get update && apt-get install -y wget && \
         export SAWTOOTH_HOME=/etc/sawtooth && \
         if [ ! -e /etc/sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
-        if [ ! -e /etc/sawtooth/etc/validator.toml ]; then && \
-          wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml; && \
-          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml; && \
+        if [ ! -e /etc/sawtooth/etc/validator.toml ]; then \
+          wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml; \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml; \
         fi && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
