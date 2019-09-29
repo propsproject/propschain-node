@@ -25,7 +25,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "settings-tp"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-settings-tp"
     image: hyperledger/sawtooth-settings-tp:1.2.2
     container_name: sawtooth-settings-tp-default
     restart: always
@@ -39,7 +39,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "pbft"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-pbft"
     image: hyperledger/sawtooth-pbft-engine:1.0.0
     container_name: sawtooth-pbft-engine
     restart: always
@@ -55,7 +55,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "propschain-tp"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
     restart: always
     environment:
       - VALIDATOR_URL
@@ -73,7 +73,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "validator"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-validator"
     restart: always
     image: hyperledger/sawtooth-validator:1.2.2
     container_name: sawtooth-validator-default
@@ -118,7 +118,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "identity"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-identity"
     restart: always
     image: hyperledger/sawtooth-identity-tp:1.2.2
     container_name: sawtooth-identity
@@ -132,7 +132,7 @@ services:
       options:
         awslogs-region: "us-east-1"
         awslogs-group: "sawtooth-logs"
-        awslogs-stream: "restapi"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-restapi"
     restart: always
     image: hyperledger/sawtooth-rest-api:1.2.2
     container_name: sawtooth-rest-api-default
