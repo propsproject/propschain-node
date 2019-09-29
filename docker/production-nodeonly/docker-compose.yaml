@@ -67,6 +67,60 @@ services:
       - validator
     entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
 
+  pending-props-tp-2:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-2
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  pending-props-tp-3:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-3
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  pending-props-tp-4:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-4
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
   validator:
     logging:
       driver: "awslogs"
