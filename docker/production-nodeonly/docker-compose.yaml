@@ -90,7 +90,7 @@ services:
         apt-get update && apt-get install -y wget && \
         export SAWTOOTH_HOME=/etc/sawtooth && \
         if [ ! -e $SAWTOOTH_HOME/keys/validator.priv ]; then sawadm keygen; fi && \
-        wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-nodeonly/master/docker/validator.toml && \
+        wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
         sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
@@ -145,7 +145,7 @@ services:
       - validator
     entrypoint: "bash -c \"\
           apt-get update && apt-get install -y wget && \
-          wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-nodeonly/master/docker/validator.toml && \
+          wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
           sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/validator.toml && \
           sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
         \""
