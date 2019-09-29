@@ -90,8 +90,8 @@ services:
         apt-get update && apt-get install -y wget && \
         export SAWTOOTH_HOME=/etc/sawtooth && \
         if [ ! -e $SAWTOOTH_HOME/keys/validator.priv ]; then sawadm keygen; fi && \
-        mkdir -p /poet-shared/validator || true && \
-        cp -a /etc/sawtooth/keys /poet-shared/validator/ && \
+        wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-nodeonly/master/docker/validator.toml && \
+        sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
           --bind component:tcp://eth0:4004 \
@@ -109,6 +109,7 @@ services:
       - NETWORK_PUBLIC_KEY
       - NETWORK_PRIVATE_KEY
       - VALIDATOR_SEED_URL
+      - OPENTSDB_PASSWORD
       - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
     stop_signal: SIGKILL
 
@@ -136,11 +137,18 @@ services:
     restart: always
     image: hyperledger/sawtooth-rest-api:1.2.2
     container_name: sawtooth-rest-api-default
+    environment:
+      - OPENTSDB_PASSWORD
     ports:
       - "8008:8008"
     depends_on:
       - validator
-    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+    entrypoint: "bash -c \"\
+          apt-get update && apt-get install -y wget && \
+          wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-nodeonly/master/docker/validator.toml && \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/validator.toml && \
+          sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+        \""
 
   shell:
     restart: always

@@ -1,1 +1,4 @@
-peering = "static"
+opentsdb_url = "https://metrics.propschain.propsproject.io"
+opentsdb_db = "metrics"
+opentsdb_username = "lrdata"
+opentsdb_password = "%OPENTSDB_PASSWORD%"

@@ -130,3 +130,7 @@ variable "sawtooth_rest_https" {
 variable "state_api_url" {
   description = "Url for state api activity summary"
 }
+
+variable "opentsdb_password" {
+  description = "The password for the metrics server"
+}

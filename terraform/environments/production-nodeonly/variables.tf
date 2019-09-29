@@ -122,3 +122,7 @@ variable "validator_seed_url" {
 variable "instance_type" {
   description = "The machine type for the instance"
 }
+
+variable "opentsdb_password" {
+  description = "The password for the metrics server"
+}

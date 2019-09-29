@@ -47,6 +47,7 @@ echo "export VALIDATOR_SEED_URL=${validator_seed_url}" >> /home/ec2-user/.bashrc
 echo "export VALIDATOR_SUBMISSION_PK=${validator_submission_pk}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_HTTPS=${sawtooth_rest_https}" >> /home/ec2-user/.bashrc
 echo "export STATE_API_URI=${state_api_url}" >> /home/ec2-user/.bashrc
+echo "export OPENTSDB_PASSWORD=${opentsdb_password}" >> /home/ec2-user/.bashrc
 
 PUBLIC_IP=`aws ec2 describe-addresses --region us-east-1 --allocation-ids $ALLOCATION_ID | jq -r '.Addresses[0].PublicIp'`
 echo "export PUBLIC_IP_ADDRESS=$PUBLIC_IP" >> /home/ec2-user/.bashrc

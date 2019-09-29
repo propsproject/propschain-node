@@ -40,6 +40,7 @@ data "template_file" "user_data" {
     validator_seed_url            = "${var.validator_seed_url}"
     sawtooth_rest_https           = "${var.sawtooth_rest_https}"
     state_api_url                 = "${var.state_api_url}"
+    opentsdb_password             = "${var.opentsdb_password}"
   }
 }
 
