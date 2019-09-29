@@ -20,6 +20,12 @@ volumes:
 
 services:
   settings-tp:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "settings-tp"
     image: hyperledger/sawtooth-settings-tp:1.2.2
     container_name: sawtooth-settings-tp-default
     restart: always
@@ -28,6 +34,12 @@ services:
     entrypoint: settings-tp -vv -C tcp://validator:4004
 
   pbft:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "pbft"
     image: hyperledger/sawtooth-pbft-engine:1.0.0
     container_name: sawtooth-pbft-engine
     restart: always
@@ -38,6 +50,12 @@ services:
     entrypoint: pbft-engine -vv -C tcp://validator:5050
 
   pending-props-tp:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "propschain-tp"
     restart: always
     environment:
       - VALIDATOR_URL
@@ -50,6 +68,12 @@ services:
     entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
 
   validator:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "validator"
     restart: always
     image: hyperledger/sawtooth-validator:1.2.2
     container_name: sawtooth-validator-default
@@ -89,6 +113,12 @@ services:
     stop_signal: SIGKILL
 
   sawtooth-identity:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "identity"
     restart: always
     image: hyperledger/sawtooth-identity-tp:1.2.2
     container_name: sawtooth-identity
@@ -97,6 +127,12 @@ services:
     entrypoint: identity-tp -v -C tcp://validator:4004
 
   rest-api:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "restapi"
     restart: always
     image: hyperledger/sawtooth-rest-api:1.2.2
     container_name: sawtooth-rest-api-default
