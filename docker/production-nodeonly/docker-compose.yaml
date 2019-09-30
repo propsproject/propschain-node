@@ -143,9 +143,9 @@ services:
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
         export SAWTOOTH_HOME=/etc/sawtooth && \
-        if [ ! -e /etc/sawtooth/data ];  mkdir -p /etc/sawtooth/data; fi && \
-        if [ ! -e /etc/sawtooth/logs ];  mkdir -p /etc/sawtooth/logs; fi && \
-        if [ ! -e /etc/sawtooth/etc ];  mkdir -p /etc/sawtooth/etc; fi && \
+        if [ ! -e /etc/sawtooth/data ]; then mkdir -p /etc/sawtooth/data; fi && \
+        if [ ! -e /etc/sawtooth/logs ]; then mkdir -p /etc/sawtooth/logs; fi && \
+        if [ ! -e /etc/sawtooth/etc ]; then mkdir -p /etc/sawtooth/etc; fi && \
         if [ ! -e /etc/sawtooth/policy ];  mkdir -p /etc/sawtooth/policy; fi && \
         if [ ! -e /etc/sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
         if [ ! -e /etc/sawtooth/etc/validator.toml ]; then \
