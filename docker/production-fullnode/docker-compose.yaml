@@ -1,0 +1,223 @@
+# Copyright 2017 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ------------------------------------------------------------------------------
+
+version: "2.1"
+
+volumes:
+  poet-shared:
+
+services:
+  settings-tp:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-settings-tp"
+    image: hyperledger/sawtooth-settings-tp:1.2.2
+    container_name: sawtooth-settings-tp-default
+    restart: always
+    depends_on:
+      - validator
+    entrypoint: settings-tp -vv -C tcp://validator:4004
+
+  pbft:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-pbft"
+    image: hyperledger/sawtooth-pbft-engine:1.0.0
+    container_name: sawtooth-pbft-engine
+    restart: always
+    expose:
+      - 5050
+    depends_on:
+      - validator
+    entrypoint: pbft-engine -vv -C tcp://validator:5050
+
+  pending-props-tp:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  pending-props-tp-2:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-2
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  pending-props-tp-3:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-3
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  pending-props-tp-4:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
+    restart: always
+    environment:
+      - VALIDATOR_URL
+      - ETHEREUM_URL
+      - PROPS_TOKEN_CONTRACT_ADDRESS
+    image: propsprojectservices/props-transaction-processor:latest
+    container_name: pending-props-tp-4
+    depends_on:
+      - validator
+    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
+
+  validator:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-validator"
+    restart: always
+    image: hyperledger/sawtooth-validator:1.2.2
+    container_name: sawtooth-validator-default
+    expose:
+      - 4004
+      - 8800
+      - 5050
+    ports:
+      - "4004:4004"
+      - "8800:8800"
+      - "5050:5050"
+    # start the validator with an empty genesis batch
+    entrypoint: "bash -c \"\
+        apt-get update && apt-get install -y wget && \
+        export SAWTOOTH_HOME=/etc/sawtooth && \
+        if [ ! -e /etc/sawtooth/data ]; then mkdir -p /etc/sawtooth/data; fi && \
+        if [ ! -e /etc/sawtooth/logs ]; then mkdir -p /etc/sawtooth/logs; fi && \
+        if [ ! -e /etc/sawtooth/etc ]; then mkdir -p /etc/sawtooth/etc; fi && \
+        if [ ! -e /etc/sawtooth/policy ]; then mkdir -p /etc/sawtooth/policy; fi && \
+        if [ ! -e /etc/sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
+        if [ ! -e /etc/sawtooth/etc/validator.toml ]; then \
+          wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml; \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml; \
+        fi && \
+        sawtooth-validator -vv \
+          --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
+          --bind component:tcp://eth0:4004 \
+          --bind network:tcp://eth0:8800 \
+          --bind consensus:tcp://eth0:5050 \
+          --scheduler parallel \
+          -P static \
+          --peers $VALIDATOR_SEED_URL
+        \""
+    volumes:
+      - poet-shared:/poet-shared
+      - /etc/sawtooth:/etc/sawtooth
+    environment:
+      - PUBLIC_IP_ADDRESS
+      - NETWORK_PUBLIC_KEY
+      - NETWORK_PRIVATE_KEY
+      - VALIDATOR_SEED_URL
+      - OPENTSDB_PASSWORD
+      - PYTHONPATH=/project/sawtooth-core/consensus/poet/common:/project/sawtooth-core/consensus/poet/simulator:/project/sawtooth-core/consensus/poet/core
+    stop_signal: SIGKILL
+
+  sawtooth-identity:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-identity"
+    restart: always
+    image: hyperledger/sawtooth-identity-tp:1.2.2
+    container_name: sawtooth-identity
+    depends_on:
+      - validator
+    entrypoint: identity-tp -v -C tcp://validator:4004
+
+  rest-api:
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "sawtooth-logs"
+        awslogs-stream: "${PUBLIC_IP_ADDRESS}-restapi"
+    restart: always
+    image: hyperledger/sawtooth-rest-api:1.2.2
+    container_name: sawtooth-rest-api-default
+    environment:
+      - OPENTSDB_PASSWORD
+    ports:
+      - "8008:8008"
+    depends_on:
+      - validator
+    entrypoint: "bash -c \"\
+          apt-get update && apt-get install -y wget && \
+          wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/validator.toml && \
+          mv /etc/sawtooth/validator.toml /etc/sawtooth/rest_api.toml && \
+          sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+        \""
+
+  shell:
+    restart: always
+    image: hyperledger/sawtooth-shell:1.2.2
+    container_name: sawtooth-shell-default
+    depends_on:
+      - rest-api
+    entrypoint: "bash -c \"\
+        sawtooth keygen && \
+        tail -f /dev/null \
+        \""

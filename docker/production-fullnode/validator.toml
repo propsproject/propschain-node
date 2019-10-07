@@ -1,0 +1,4 @@
+opentsdb_url = "http://metrics.propschain.propsproject.io:8086"
+opentsdb_db = "metrics"
+opentsdb_username = "lrdata"
+opentsdb_password = "%OPENTSDB_PASSWORD%"
