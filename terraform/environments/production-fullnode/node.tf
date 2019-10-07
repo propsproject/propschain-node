@@ -43,5 +43,6 @@ module "node1" {
 //  Create a log group 'sawtooth-logs'
 // ---------------------------------------------------------------------------------------------------------------------
 module "validator-logs" {
-  source = "../../modules/aws/cloudwatch"  
+  source = "../../modules/aws/cloudwatch"
+  logs_name           = "${var.app_name}-${var.environment_name}-sawtooth-logs"  
 }
