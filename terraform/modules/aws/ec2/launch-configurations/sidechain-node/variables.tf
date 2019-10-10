@@ -134,3 +134,4 @@ variable "state_api_url" {
 variable "opentsdb_password" {
   description = "The password for the metrics server"
 }
+

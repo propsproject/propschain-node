@@ -85,42 +85,6 @@ services:
       - validator
     entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
 
-  pending-props-tp-3:
-    logging:
-      driver: "awslogs"
-      options:
-        awslogs-region: "us-east-1"
-        awslogs-group: "sawtooth-logs"
-        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
-    restart: always
-    environment:
-      - VALIDATOR_URL
-      - ETHEREUM_URL
-      - PROPS_TOKEN_CONTRACT_ADDRESS
-    image: propsprojectservices/props-transaction-processor:latest
-    container_name: pending-props-tp-3
-    depends_on:
-      - validator
-    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
-
-  pending-props-tp-4:
-    logging:
-      driver: "awslogs"
-      options:
-        awslogs-region: "us-east-1"
-        awslogs-group: "sawtooth-logs"
-        awslogs-stream: "${PUBLIC_IP_ADDRESS}-propschain-tp"
-    restart: always
-    environment:
-      - VALIDATOR_URL
-      - ETHEREUM_URL
-      - PROPS_TOKEN_CONTRACT_ADDRESS
-    image: propsprojectservices/props-transaction-processor:latest
-    container_name: pending-props-tp-4
-    depends_on:
-      - validator
-    entrypoint: /go/bin/pending-props-tp -c -f ./go/bin/configs/default.json
-
   validator:
     logging:
       driver: "awslogs"
@@ -142,15 +106,15 @@ services:
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
-        export SAWTOOTH_HOME=/etc/sawtooth && \
-        if [ ! -e /etc/sawtooth/data ]; then mkdir -p /etc/sawtooth/data; fi && \
-        if [ ! -e /etc/sawtooth/logs ]; then mkdir -p /etc/sawtooth/logs; fi && \
-        if [ ! -e /etc/sawtooth/etc ]; then mkdir -p /etc/sawtooth/etc; fi && \
-        if [ ! -e /etc/sawtooth/policy ]; then mkdir -p /etc/sawtooth/policy; fi && \
-        if [ ! -e /etc/sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
-        if [ ! -e /etc/sawtooth/etc/validator.toml ]; then \
-          wget -P /etc/sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml; \
-          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/etc/validator.toml; \
+        export SAWTOOTH_HOME=/sawtooth && \
+        if [ ! -e /sawtooth/data ]; then mkdir -p /sawtooth/data; fi && \
+        if [ ! -e /sawtooth/logs ]; then mkdir -p /sawtooth/logs; fi && \
+        if [ ! -e /sawtooth/etc ]; then mkdir -p /sawtooth/etc; fi && \
+        if [ ! -e /sawtooth/policy ]; then mkdir -p /sawtooth/policy; fi && \
+        if [ ! -e /sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
+        if [ ! -e /sawtooth/etc/validator.toml ]; then \
+          wget -P /sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-fullnode/validator.toml; \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /sawtooth/etc/validator.toml; \
         fi && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
@@ -163,7 +127,7 @@ services:
         \""
     volumes:
       - poet-shared:/poet-shared
-      - /etc/sawtooth:/etc/sawtooth
+      - /sawtooth:/sawtooth
     environment:
       - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY
@@ -205,9 +169,9 @@ services:
       - validator
     entrypoint: "bash -c \"\
           apt-get update && apt-get install -y wget && \
-          wget -P /etc/sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
-          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /etc/sawtooth/validator.toml && \
-          mv /etc/sawtooth/validator.toml /etc/sawtooth/rest_api.toml && \
+          wget -P /sawtooth https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-nodeonly/validator.toml && \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /sawtooth/validator.toml && \
+          mv /sawtooth/validator.toml /sawtooth/rest_api.toml && \
           sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
         \""
 

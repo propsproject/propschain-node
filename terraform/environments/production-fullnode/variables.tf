@@ -126,3 +126,43 @@ variable "instance_type" {
 variable "opentsdb_password" {
   description = "The password for the metrics server"
 }
+
+variable "sawtooth_pk_fullnode" {
+  description = "The private key for the fullnode"
+}
+
+variable "sawtooth_pub_fullnode" {
+  description = "The public key for the fullnode"
+}
+
+variable "sawtooth_pk_node1" {
+  description = "The private key for the node"
+}
+
+variable "sawtooth_pub_node1" {
+  description = "The public key for the node"
+}
+
+variable "sawtooth_pk_node2" {
+  description = "The private key for the node"
+}
+
+variable "sawtooth_pub_node2" {
+  description = "The public key for the node"
+}
+
+variable "sawtooth_pk_node3" {
+  description = "The private key for the node"
+}
+
+variable "sawtooth_pub_node3" {
+  description = "The public key for the node"
+}
+
+variable "sawtooth_pk_node4" {
+  description = "The private key for the node"
+}
+
+variable "sawtooth_pub_node4" {
+  description = "The public key for the node"
+}
