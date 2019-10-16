@@ -134,7 +134,7 @@ fi
 done
 
 PEERS_STR=$(join_by , "${peers_array[@]}")
-echo "export VALIDATOR_PEER_STR=$PEERS_STR" >> /home/ec2-user/.bashrc
+echo "calculated PEER_STR=$PEERS_STR my ip $PUBLIC_IP_ADDRESS" >> $SAWTOOTH_HOME/logs/setup-logs
 
 sawtooth-validator  \
     --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
@@ -143,6 +143,6 @@ sawtooth-validator  \
     --bind consensus:tcp://eth0:5050 \
     --scheduler parallel \
     -P static \
-    --peers $VALIDATOR_PEER_STR \
+    --peers $PEERS_STR \
     --opentsdb-url http://metrics.propschain.propsproject.io:8086 \
     --opentsdb-db metrics
