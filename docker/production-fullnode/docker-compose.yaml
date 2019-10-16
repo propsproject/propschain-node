@@ -109,7 +109,7 @@ services:
         export SAWTOOTH_HOME=${SAWTOOTH_HOME} && \
         export ENVIRONMENT=${ENVIRONMENT} && \
         export PUBLIC_IP_ADDRESS=${PUBLIC_IP_ADDRESS} && \
-        export OPENTSDB_PASSWORD=${OPENTSDB_PASSWORD} && /
+        export OPENTSDB_PASSWORD=${OPENTSDB_PASSWORD} && \
         sh $SAWTOOTH_HOME/docker/production-fullnode/validator.sh
         \""
     volumes:
