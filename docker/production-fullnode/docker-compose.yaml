@@ -106,16 +106,18 @@ services:
     # start the validator with an empty genesis batch
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
-        export SAWTOOTH_HOME=/sawtooth && \
-        if [ ! -e /sawtooth/data ]; then mkdir -p /sawtooth/data; fi && \
-        if [ ! -e /sawtooth/logs ]; then mkdir -p /sawtooth/logs; fi && \
-        if [ ! -e /sawtooth/etc ]; then mkdir -p /sawtooth/etc; fi && \
-        if [ ! -e /sawtooth/policy ]; then mkdir -p /sawtooth/policy; fi && \
-        if [ ! -e /sawtooth/keys/validator.priv ]; then sawadm keygen; fi && \
-        if [ ! -e /sawtooth/etc/validator.toml ]; then \
-          wget -P /sawtooth/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-fullnode/validator.toml; \
-          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' /sawtooth/etc/validator.toml; \
+        export SAWTOOTH_HOME=${SAWTOOTH_HOME} && \
+        if [ ! -e ${SAWTOOTH_HOME}/data ]; then mkdir -p ${SAWTOOTH_HOME}/data; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/logs ]; then mkdir -p ${SAWTOOTH_HOME}/logs; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/etc ]; then mkdir -p ${SAWTOOTH_HOME}/etc; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/policy ]; then mkdir -p ${SAWTOOTH_HOME}/policy; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/keys/validator.priv ]; then sawadm keygen; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/etc/validator.toml ]; then \
+          wget -P ${SAWTOOTH_HOME}/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-fullnode/validator.toml; \
+          sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' ${SAWTOOTH_HOME}/etc/validator.toml; \
         fi && \
+        if [ ! -e "$SAWTOOTH_HOME/logs/validator-debug.log" ]; then echo "[CREATING] Creating the validator-debug.log file" && touch $SAWTOOTH_HOME/logs/validator-debug.log; fi && \
+        if [ $GENESIS_BATCH == true ] && [ ! -e /opt/config-genesis.batch ]; then echo "[CREATING] No config-genesis.batch file" && sawset genesis -k $SAWTOOTH_HOME/keys/validator.priv -o /opt/config-genesis.batch; fi && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
           --bind component:tcp://eth0:4004 \
