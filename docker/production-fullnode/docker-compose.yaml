@@ -129,7 +129,7 @@ services:
         \""
     volumes:
       - poet-shared:/poet-shared
-      - /sawtooth:/sawtooth
+      - /data:/data
     environment:
       - PUBLIC_IP_ADDRESS
       - NETWORK_PUBLIC_KEY
