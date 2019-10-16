@@ -122,18 +122,19 @@ propagate = true
 handlers = [ "debug"]
 EOF
 
-function join_by { local IFS="$1"; shift; echo "$*"; }
-IFS=',' read -r -a my_array <<< "$(cat $SAWTOOTH_HOME/peers)"
-peers_array=()
-for element in "${my_array[@]}"
-do
-if [[ $element != *"${PUBLIC_IP_ADDRESS}"* ]]; then
-  echo "Added peer $element"
-  peers_array+=($element)
-fi
-done
+# function join_by { local IFS="$1"; shift; echo "$*"; }
+# IFS=',' read -r -a my_array <<< "$(cat $SAWTOOTH_HOME/peers)"
+# peers_array=()
+# for element in "${my_array[@]}"
+# do
+# if [[ $element != *"${PUBLIC_IP_ADDRESS}"* ]]; then
+#   echo "Added peer $element"
+#   peers_array+=($element)
+# fi
+# done
 
-PEERS_STR=$(join_by , "${peers_array[@]}")
+# PEERS_STR=$(cat $SAWTOOTH_HOME/join_by , "${peers_array[@]}")
+PEER_STR=$(cat $SAWTOOTH_HOME/peers)
 echo "calculated PEER_STR=$PEERS_STR my ip $PUBLIC_IP_ADDRESS" >> $SAWTOOTH_HOME/logs/setup-logs
 
 sawtooth-validator  \
