@@ -30,7 +30,7 @@ if [ ! -e "$SAWTOOTH_HOME/etc/validator.toml" ]; then
     echo "opentsdb_url = \"http://metrics.propschain.propsproject.io:8086\"" >> $SAWTOOTH_HOME/etc/validator.toml
     echo "opentsdb_db = \"metrics\"" >> $SAWTOOTH_HOME/etc/validator.toml
     echo "opentsdb_username = \"lrdata\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_password = \"${OPENTSDB_PW}\"" >> $SAWTOOTH_HOME/etc/validator.toml        
+    echo "opentsdb_password = \"${OPENTSDB_PASSWORD}\"" >> $SAWTOOTH_HOME/etc/validator.toml        
     cat $SAWTOOTH_HOME/etc/validator.toml
 fi
 
