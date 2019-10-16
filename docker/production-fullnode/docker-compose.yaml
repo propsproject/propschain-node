@@ -116,7 +116,7 @@ services:
           wget -P ${SAWTOOTH_HOME}/etc https://raw.githubusercontent.com/propsproject/propschain-node/master/docker/production-fullnode/validator.toml; \
           sed -i 's/%OPENTSDB_PASSWORD%/$OPENTSDB_PASSWORD/g' ${SAWTOOTH_HOME}/etc/validator.toml; \
         fi && \
-        if [ ! -e ${SAWTOOTH_HOME}/logs/validator-debug.log" ]; then echo '[CREATING] Creating the validator-debug.log file' && touch $SAWTOOTH_HOME/logs/validator-debug.log; fi && \
+        if [ ! -e ${SAWTOOTH_HOME}/logs/validator-debug.log ]; then echo '[CREATING] Creating the validator-debug.log file' && touch $SAWTOOTH_HOME/logs/validator-debug.log; fi && \
         if [ $GENESIS_BATCH == true ] && [ ! -e ${SAWTOOTH_HOME}/config-genesis.batch ]; then echo '[CREATING] No config-genesis.batch file' && sawset genesis -k ${SAWTOOTH_HOME}/keys/validator.priv -o ${SAWTOOTH_HOME}//config-genesis.batch; fi && \
         sawtooth-validator -vv \
           --endpoint tcp://$PUBLIC_IP_ADDRESS:8800 \
