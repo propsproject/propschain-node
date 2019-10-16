@@ -69,7 +69,7 @@ echo "export DATA_DIR=$DATA_DIR" >> /home/ec2-user/.bashrc
 
 PUBLIC_IP=`aws ec2 describe-addresses --region us-east-1 --allocation-ids $ALLOCATION_ID | jq -r '.Addresses[0].PublicIp'`
 echo "export PUBLIC_IP_ADDRESS=$PUBLIC_IP" >> /home/ec2-user/.bashrc
-
+curl -L "https://raw.githubusercontent.com/propsproject/propschain-node/master/terraform/environments/${environment}-fullnode/network/peers" -o $DATA_DIR/peers
 SAWTOOTH_HOME=$DATA_DIR
 echo "export SAWTOOTH_HOME=$SAWTOOTH_HOME" >> /home/ec2-user/.bashrc
 
