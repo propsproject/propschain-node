@@ -129,8 +129,8 @@ EOF
 # done
 
 # PEERS_STR=$(cat $SAWTOOTH_HOME/join_by , "${peers_array[@]}")
-sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800,++g' $SAWTOOTH_HOME/peers
-sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800++g' $SAWTOOTH_HOME/peers
+sed -i "s+tcp://$PUBLIC_IP_ADDRESS:8800,++g" $SAWTOOTH_HOME/peers
+sed -i "s+tcp://$PUBLIC_IP_ADDRESS:8800++g" $SAWTOOTH_HOME/peers
 
 PEERS_STR=$(cat $SAWTOOTH_HOME/peers)
 echo "calculated PEERS_STR=$PEERS_STR my ip $PUBLIC_IP_ADDRESS" >> $SAWTOOTH_HOME/logs/setup-logs
