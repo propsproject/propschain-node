@@ -1,7 +1,3 @@
-#!/bin/sh
-apt-get update
-apt-get install bash curl -y
-
 #!/bin/bash
 
 if [ ! -e "$SAWTOOTH_HOME/logs" ]; then
@@ -30,8 +26,7 @@ if [ ! -e "$SAWTOOTH_HOME/etc/validator.toml" ]; then
     echo "opentsdb_url = \"http://metrics.propschain.propsproject.io:8086\"" >> $SAWTOOTH_HOME/etc/validator.toml
     echo "opentsdb_db = \"metrics\"" >> $SAWTOOTH_HOME/etc/validator.toml
     echo "opentsdb_username = \"lrdata\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_password = \"${OPENTSDB_PASSWORD}\"" >> $SAWTOOTH_HOME/etc/validator.toml        
-    cat $SAWTOOTH_HOME/etc/validator.toml
+    echo "opentsdb_password = \"${OPENTSDB_PASSWORD}\"" >> $SAWTOOTH_HOME/etc/validator.toml            
 fi
 
 
@@ -134,6 +129,9 @@ EOF
 # done
 
 # PEERS_STR=$(cat $SAWTOOTH_HOME/join_by , "${peers_array[@]}")
+sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800,++g' $SAWTOOTH_HOME/peers
+sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800++g' $SAWTOOTH_HOME/peers
+
 PEERS_STR=$(cat $SAWTOOTH_HOME/peers)
 echo "calculated PEERS_STR=$PEERS_STR my ip $PUBLIC_IP_ADDRESS" >> $SAWTOOTH_HOME/logs/setup-logs
 

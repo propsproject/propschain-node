@@ -104,8 +104,7 @@ services:
       - "8800:8800"
       - "5050:5050"
     # start the validator with an empty genesis batch
-    entrypoint: "bash -c \"\
-        apt-get update && apt-get install -y wget && \
+    entrypoint: "bash -c \"\        
         export SAWTOOTH_HOME=${SAWTOOTH_HOME} && \
         export ENVIRONMENT=${ENVIRONMENT} && \
         export PUBLIC_IP_ADDRESS=${PUBLIC_IP_ADDRESS} && \

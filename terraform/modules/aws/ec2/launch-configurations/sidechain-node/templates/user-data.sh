@@ -54,6 +54,15 @@ echo "export PUBLIC_IP_ADDRESS=$PUBLIC_IP" >> /home/ec2-user/.bashrc
 
 SAWTOOTH_HOME='/etc/sawtooth'
 
+curl -L "https://raw.githubusercontent.com/propsproject/propschain-node/master/terraform/environments/${environment}-fullnode/network/peers" -o $SAWTOOTH_HOME/peers
+sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800,++g' $SAWTOOTH_HOME/peers
+sed -i '' 's+tcp://$PUBLIC_IP_ADDRESS:8800++g' $SAWTOOTH_HOME/peers
+
+PEERS_STR=$(cat $SAWTOOTH_HOME/peers)
+echo "export VALIDATOR_SEED_URL=$PEERS_STR" >> /home/ec2-user/.bashrc
+
+
+
 if [ ! -e "$SAWTOOTH_HOME/logs" ]; then
     mkdir -p $SAWTOOTH_HOME/logs
 fi
