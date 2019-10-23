@@ -51,14 +51,19 @@ echo "export OPENTSDB_PASSWORD=${opentsdb_password}" >> /home/ec2-user/.bashrc
 
 PUBLIC_IP=`aws ec2 describe-addresses --region us-east-1 --allocation-ids $ALLOCATION_ID | jq -r '.Addresses[0].PublicIp'`
 echo "export PUBLIC_IP_ADDRESS=$PUBLIC_IP" >> /home/ec2-user/.bashrc
+SAWTOOTH_HOME=/etc/sawtooth
+echo "export SAWTOOTH_HOME=/etc/sawtooth" >> /home/ec2-user/.bashrc
 
-SAWTOOTH_HOME='/etc/sawtooth'
+if [ ! -e "$SAWTOOTH_HOME" ]; then
+    mkdir -p $SAWTOOTH_HOME
+fi
 
 curl -L "https://raw.githubusercontent.com/propsproject/propschain-node/master/terraform/environments/${environment}-fullnode/network/peers" -o $SAWTOOTH_HOME/peers
-sed -i "s+tcp://$PUBLIC_IP_ADDRESS:8800,++g" $SAWTOOTH_HOME/peers
-sed -i "s+tcp://$PUBLIC_IP_ADDRESS:8800++g" $SAWTOOTH_HOME/peers
+sed -i "s+tcp://$PUBLIC_IP:8800,++g" $SAWTOOTH_HOME/peers
+sed -i "s+tcp://$PUBLIC_IP:8800++g" $SAWTOOTH_HOME/peers
 
 PEERS_STR=$(cat $SAWTOOTH_HOME/peers)
+echo "finished replacing $PUBLIC_IP in $SAWOOTH_HOME/peers PEER_STR=>VALIDATOR_SEED_URL=>$PEERS_STR"
 echo "export VALIDATOR_SEED_URL=$PEERS_STR" >> /home/ec2-user/.bashrc
 
 

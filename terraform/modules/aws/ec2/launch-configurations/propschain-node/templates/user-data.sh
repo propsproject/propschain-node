@@ -96,6 +96,11 @@ fi
 chmod -R 775 $SAWTOOTH_HOME
 chown ec2-user:ec2-user $SAWTOOTH_HOME -R
 
+
+croncmd=". \$HOME/.bash_profile; /usr/local/bin/docker-compose -f $SAWTOOTH_HOME/docker/${which_docker_compose}/eth-sync.yaml run --entrypoint \"npm run sync-latest\" eth-sync >> /tmp/sync.log 2>&1"
+cronjob="${frequency_minutes} ${frequency_hours} * * * $croncmd"
+( crontab -u ec2-user -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -u ec2-user -
+
 runuser -l ec2-user -c "docker-compose -f $SAWTOOTH_HOME/docker/${which_docker_compose}/docker-compose.yaml up -d"
 
 

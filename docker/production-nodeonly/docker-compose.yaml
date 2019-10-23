@@ -140,6 +140,7 @@ services:
       - "8800:8800"
       - "5050:5050"
     # start the validator with an empty genesis batch
+    hostname: "$PUBLIC_IP_ADDRESS"
     entrypoint: "bash -c \"\
         apt-get update && apt-get install -y wget && \
         export SAWTOOTH_HOME=/etc/sawtooth && \
