@@ -10,22 +10,21 @@ service docker start
 chkconfig docker on
 usermod -a -G docker ec2-user
 if [ "${use_ebs}" = true ]; then
-    if [ ! -e "/data/sawtooth" ]; then
-        mkfs -t xfs /dev/sdf
+    if [ ! -e "/sawtooth" ]; then
+        # mkfs -t xfs /dev/sdf
         echo "Setup file system"
     fi    
-    mkdir -p /data
-    mount /dev/sdf /data
-    mkdir -p /data/sawtooth
-    DATA_DIR=/data/sawtooth
-    chmod -R 775 /data
-    chown ec2-user:ec2-user /data -R    
-    echo "Mounted /dev/sdf to /data and created $DATA_DIR"
+    # mkdir -p /sawtooth
+    # mount /dev/sdf /sawtooth    
+    # DATA_DIR=/sawtooth
+    # chmod -R 775 /sawtooth
+    # chown ec2-user:ec2-user /sawtooth -R    
+    echo "Mounted /dev/sdf to /sawtooth and $DATA_DIR created"
 else
     mkdir -p /opt/sawtooth
     DATA_DIR=/opt/sawtooth
     chmod -R 775 $DATA_DIR
-    chown ec2-user:ec2-user $DATA_DIR
+    chown ec2-user:ec2-user $DATA_DIR -R
     echo "Using local dir $DATA_DIR"
 fi
 

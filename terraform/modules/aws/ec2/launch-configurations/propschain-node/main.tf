@@ -96,6 +96,7 @@ resource "aws_launch_configuration" "sidechain_lc_with_ebs" {
     device_name           = "/dev/sdf"    
     volume_size           = "${var.volume_size_gb}"
     volume_type           = "gp2"
+    delete_on_termination = false
     
     # tags = {
     #   Name = "${var.node_name}-${var.app_name}-${var.environment_name}-ebs"
