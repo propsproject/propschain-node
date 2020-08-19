@@ -38,6 +38,8 @@ echo "export SAWTOOTH_REST_URL=${sawtooth_rest_url}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_PORT=${sawtooth_rest_port}" >> /home/ec2-user/.bashrc
 echo "export SAWTOOTH_REST_HTTPS=${sawtooth_rest_https}" >> /home/ec2-user/.bashrc
 echo "export STATE_API_URI=${state_api_url}" >> /home/ec2-user/.bashrc
+echo "export GAS_PRICE=${gas_price}" >> /home/ec2-user/.bashrc
+echo "export SUBMIT_REWARDS_RETRY_GAS_INC=${submit_rewards_retry_gas_inc}" >> /home/ec2-user/.bashrc
 
 curl http://169.254.169.254/latest/meta-data/public-ipv4 | xargs -I {} -n 1 echo "export PUBLIC_IP_ADDRESS={}" >> /home/ec2-user/.bashrc
 

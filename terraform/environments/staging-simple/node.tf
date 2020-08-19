@@ -25,6 +25,9 @@ module "node1" {
   sawtooth_rest_port            = "${var.sawtooth_rest_port}"
   sawtooth_rest_https           = "${var.sawtooth_rest_https}"
   state_api_url                 = "${var.state_api_url}"
+  gas_price                     = "${var.gas_price}"
+  submit_rewards_retry_gas_inc  = "${var.submit_rewards_retry_gas_inc}" 
+
 }
 
 output "node_ip" {

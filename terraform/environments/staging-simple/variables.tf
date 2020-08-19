@@ -86,3 +86,11 @@ variable "state_api_url" {
   description = "Url for state api activity summary"
 }
 
+variable "gas_price" {
+  description = "Gas price to use when submitting rewards (gwei)"
+}
+
+variable "submit_rewards_retry_gas_inc" {
+  description = "How much to increment gas price in each retry (gwei)"
+}
+

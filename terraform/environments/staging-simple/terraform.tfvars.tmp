@@ -32,3 +32,6 @@ sawtooth_rest_url               = "staging-api.sidechain.propsproject.io"
 sawtooth_rest_port              = "443"
 sawtooth_rest_https             = "true"
 state_api_url                   = "https://staging-state.sidechain.propsproject.io/state/activity/summary"
+gas_price                       = "1"
+submit_rewards_retry_gas_inc    = "1"
+
