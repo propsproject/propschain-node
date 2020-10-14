@@ -31,7 +31,7 @@ rewards_start_timestamp         = "1561248000"
 sawtooth_rest_url               = "staging-api.sidechain.propsproject.io"
 sawtooth_rest_port              = "443"
 sawtooth_rest_https             = "true"
-state_api_url                   = "https://staging-state.sidechain.propsproject.io/state/activity/summary"
+state_api_url                   = "https://staging-api.propsproject.io/v1/earnings/activity/daily_summary"
 gas_price                       = "1"
 submit_rewards_retry_gas_inc    = "1"
 
