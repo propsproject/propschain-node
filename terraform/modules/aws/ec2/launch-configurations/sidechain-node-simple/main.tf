@@ -1,24 +1,24 @@
 module "security_group" {
   source = "../../security-groups/sidechain-node"
-
-  app_name          = "${var.app_name}"
+  
+  app_name          = "${var.app_name}-${var.node_name}"
   environment_name  = "${var.environment_name}"
   vpc_id            = "${var.vpc_id}"
 }
 
 module "policy" {
   source = "../../../iam/sidechain-node"
-
-  app_name          = "${var.app_name}"
+  
+  app_name          = "${var.app_name}-${var.node_name}"
   environment_name  = "${var.environment_name}"
 }
 
 data "template_file" "user_data" {
   template = "${file("${path.module}/templates/user-data.sh")}"
 
-  vars = {
+  vars = {    
     environment                   = "${var.environment_name}"
-    app_name                      = "${var.app_name}"
+    app_name                      = "${var.app_name}-${var.node_name}"
     ethereum_url                  = "${var.ethereum_url}"
     props_token_contract_address  = "${var.props_token_contract_address}"
     validator_submission_pk       = "${var.validator_submission_pk}"
@@ -37,7 +37,7 @@ data "template_file" "user_data" {
 }
 
 resource "aws_launch_configuration" "sidechain_lc" {
-  name_prefix   = "${var.app_name}-${var.environment_name}-lc"
+  name_prefix   = "${var.app_name}-${var.node_name}-${var.environment_name}-lc"
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
   user_data     = "${data.template_file.user_data.rendered}"
@@ -60,7 +60,7 @@ resource "aws_launch_configuration" "sidechain_lc" {
 }
 
 resource "aws_autoscaling_group" "sidechain_asg" {
-  name = "${var.app_name}-${var.environment_name}-asg"
+  name = "${var.app_name}-${var.node_name}-${var.environment_name}-asg"
 
   vpc_zone_identifier       = "${split(",", var.subnet_ids)}"
 
@@ -75,7 +75,7 @@ resource "aws_autoscaling_group" "sidechain_asg" {
 
   tag {
     key                 = "Name"
-    value               = "${var.app_name}-${var.environment_name}-asg"
+    value               = "${var.app_name}-${var.node_name}-${var.environment_name}-asg"
     propagate_at_launch = true
   }
 
@@ -87,7 +87,7 @@ resource "aws_autoscaling_group" "sidechain_asg" {
 
   tag {
     key = "App"
-    value = "${var.app_name}"
+    value = "${var.app_name}-${var.node_name}"
     propagate_at_launch = true
   }
 
@@ -107,6 +107,6 @@ resource "aws_eip" "sidechain_eip" {
 
   tags = {
     Environment = "${var.environment_name}"
-    App         = "${var.app_name}"
+    App         = "${var.app_name}-${var.node_name}"
   }
 }

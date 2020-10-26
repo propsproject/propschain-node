@@ -50,7 +50,15 @@ variable "which_docker_compose" {
   description = "Which docker compose to use"
 }
 
-variable "validator_submission_pk" {
+variable "validator1_submission_pk" {
+  description = "The submission pk"
+}
+
+variable "validator2_submission_pk" {
+  description = "The submission pk"
+}
+
+variable "validator3_submission_pk" {
   description = "The submission pk"
 }
 

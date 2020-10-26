@@ -18,7 +18,7 @@ runuser -l ec2-user -c "git clone https://github.com/propsproject/sidechain-node
 
 INSTANCE_ID=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id`
 
-ALLOCATION_ID=`aws ec2 describe-addresses --region us-east-1 --filters="Name=tag:Environment,Values=${environment},Name=tag:App,Values=${app_name}" | jq -r '.Addresses[] | "\(.InstanceId) \(.AllocationId)"' | grep null | awk '{print $2}' | xargs shuf -n1 -e`
+ALLOCATION_ID=`aws ec2 describe-addresses --region us-east-1 --filters "Name=tag:Environment,Values=${environment}" "Name=tag:App,Values=${app_name}" | jq -r '.Addresses[] | "\(.InstanceId) \(.AllocationId)"' | grep null | awk '{print $2}' | xargs shuf -n1 -e`
 
 if [ ! -z $ALLOCATION_ID ]; then
     aws ec2 associate-address --region us-east-1 --instance-id $INSTANCE_ID --allocation-id $ALLOCATION_ID --allow-reassociation

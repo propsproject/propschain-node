@@ -1,3 +1,7 @@
+variable "node_name" {
+  description = "Node Name"
+}
+
 variable "app_name" {
   description = "Application Name"
 }
